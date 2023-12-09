@@ -1,0 +1,53 @@
+﻿<Window x:Class="PolynomialAppUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PolynomialAppUI"
+        mc:Ignorable="d"
+        Background="#313952"
+        Title="Polynomial App" MinHeight="810" MinWidth="1440">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            TextAlignment="Center"
+            Text="Polynomial App"
+            Foreground="White"
+            FontSize="50"
+            />
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="15"
+            Orientation="Vertical">
+
+            <StackPanel
+                Margin="15"
+                Background="WhiteSmoke">
+
+                <TextBlock
+                    TextAlignment="Center"
+                    Text="Roots:"/>
+
+            </StackPanel>
+            
+        </StackPanel>
+        
+    </Grid>
+</Window>
