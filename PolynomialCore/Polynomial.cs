@@ -20,7 +20,9 @@ namespace PolynomialCore
 
         public double[] Coefficients { get; private set; }
 
-        public List<double>? Roots {  get; private set; } 
+        public List<double>? Roots {  get; private set; }
+
+        public List<Point>? ExtremeValues { get; private set; }
 
         public Polynomial(string polynomial) {
 
@@ -486,6 +488,24 @@ namespace PolynomialCore
             }
 
             return Math.Abs(countA - countB);
+        }
+
+        /// <summary>
+        /// Finds extreme values of this polynomial and assigns them to ExtremeValues property
+        /// </summary>
+        public void findExtremeValues()
+        {
+            ExtremeValues = new List<Point>();
+
+            var derivative = getDerivative();
+
+            derivative.findRoots();
+
+            foreach(var root in derivative.Roots!)
+            {
+                var newPoint = new Point(root, this.y(root));
+                ExtremeValues.Add(newPoint);
+            }
         }
 
         public static Polynomial operator -(Polynomial a)
