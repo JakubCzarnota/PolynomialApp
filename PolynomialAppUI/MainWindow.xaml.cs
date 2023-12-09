@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using PolynomialCore;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +17,31 @@ namespace PolynomialAppUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainWindowDataContext _dataContext;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            _dataContext = new MainWindowDataContext();
+            this.DataContext = _dataContext;
+        }
+
+        private void FormulaInput1_DataContextChanged(object sender, TextChangedEventArgs args)
+        {
+            try
+            {
+                var newPoly = new Polynomial(_dataContext.PolynomialFormula);
+
+                newPoly.findRoots();
+                newPoly.findExtremeValues();
+
+                _dataContext.Polynomial = newPoly;
+            }
+            catch (Exception)
+            {
+                _dataContext.Polynomial = null;
+            }
         }
     }
 }

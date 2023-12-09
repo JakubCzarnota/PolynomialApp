@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Background="#313952"
         Title="Polynomial App" MinHeight="810" MinWidth="1440">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:RootsConverter x:Key="RootsConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -42,12 +53,34 @@
                 Background="WhiteSmoke">
 
                 <TextBlock
-                    TextAlignment="Center"
-                    Text="Roots:"/>
+                    Style="{StaticResource Title}"
+                    Text="Polynomial's roots:"/>
+
+                <TextBlock
+                    Style="{StaticResource Value}"
+                    DataContext="{Binding Polynomial}"
+                    Text="{Binding Converter={StaticResource RootsConverter}}"/>
 
             </StackPanel>
             
         </StackPanel>
+
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
+            
+            <TextBox
+                x:Name="FormulaInput1"
+                VerticalAlignment="Center"
+                Style="{StaticResource FormulaInput}"
+                Text="{Binding PolynomialFormula, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="FormulaInput1_DataContextChanged"/>
+            
+        </StackPanel>
+
         
     </Grid>
 </Window>
