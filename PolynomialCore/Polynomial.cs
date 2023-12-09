@@ -20,7 +20,7 @@ namespace PolynomialCore
 
         public double[] Coefficients { get; private set; }
 
-        public List<double>? Roots {  get; private set; }
+        public List<Root>? Roots {  get; private set; }
 
         public List<Point>? ExtremeValues { get; private set; }
 
@@ -214,7 +214,7 @@ namespace PolynomialCore
         /// </summary>
         public void findRoots()
         {
-            Roots = new List<double>();
+            Roots = new List<Root>();
 
             if (Degree < 1)
                 return;
@@ -232,16 +232,16 @@ namespace PolynomialCore
                 if(delta > 0)
                 {
                     var x1 = (-b - deltaSqrt) / (2 * a);
-                    var x2 = (-b - deltaSqrt) / (2 * a);
+                    var x2 = (-b + deltaSqrt) / (2 * a);
 
-                    Roots.Add(x1);
-                    Roots.Add(x2);
+                    addRoot(x1);
+                    addRoot(x2);
                 }
                 else if(delta == 0)
                 {
                     var x0 = -b / (2 * a);
 
-                    Roots.Add(x0);
+                    addRoot(x0, 2);
                 }
 
                 return;
@@ -250,7 +250,7 @@ namespace PolynomialCore
 
             if (Coefficients[0] == 0)
             {
-                Roots.Add(0);
+                Roots.Add(new Root(0));
 
                 double[] newCoefficients = { 0, 1 };
 
@@ -293,7 +293,7 @@ namespace PolynomialCore
 
                         if(this.y(root) == 0)
                         {
-                            Roots.Add(root);
+                            addRoot(root);
 
                             double[] newCoefficients = {-root, 1};
 
@@ -316,7 +316,7 @@ namespace PolynomialCore
 
                         if (this.y(root) == 0)
                         {
-                            Roots.Add(root);
+                            addRoot(root);
 
                             double[] newCoefficients = {-root, 1};
 
@@ -345,8 +345,11 @@ namespace PolynomialCore
 
             var intervalsWithRoots = findIntervalsWithRoots(new Interval(-100, 100), sturmSequence);
 
-            foreach (var interval in intervalsWithRoots)
+            foreach (var intervalsWithRoot in intervalsWithRoots)
             {
+                var interval = intervalsWithRoot.interval;
+                var multiplicity = intervalsWithRoot.multiplicity;
+
                 double root = (double)((interval.A + interval.B) / 2)!;
 
                 for (int i = 0; i < 10000; i++)
@@ -355,11 +358,26 @@ namespace PolynomialCore
                 }
 
 
-                Roots.Add(root);
+                addRoot(root, multiplicity);
             }
 
             Roots.Sort();
 
+        }
+
+        /// <summary>
+        /// Adds new root or changes the multiplicity of existing one
+        /// </summary>
+        /// <param name="value">Value of root</param>
+        /// <param name="multiplicity">Multiplicity of root</param>
+        private void addRoot(double value, int multiplicity = 1)
+        {
+            var root = Roots!.Find(r => r.Value == value);
+
+            if (root != null)
+                root.Multiplicity += multiplicity;
+            else
+                Roots.Add(new Root(value, multiplicity));
         }
 
         /// <summary>
@@ -409,9 +427,9 @@ namespace PolynomialCore
         /// <param name="interval">Interval in which function should look for intervals with one root</param>
         /// <param name="sturmSequence">Sturm sequence for this polynomial</param>
         /// <returns>Intervals with one root</returns>
-        private List<Interval> findIntervalsWithRoots(Interval interval, List<Polynomial> sturmSequence)
+        private List<(Interval interval, int multiplicity)> findIntervalsWithRoots(Interval interval, List<Polynomial> sturmSequence)
         {
-            List<Interval> intervals = new List<Interval>();
+            List<(Interval interval, int multiplicity)> intervals = new List<(Interval interval, int multiplicity)>();
 
             var rootsCount = getRootsCountInInterval(interval, sturmSequence);
 
@@ -419,7 +437,7 @@ namespace PolynomialCore
             if (Math.Abs((double)(interval.A - interval.B)!) < 0.01 
                 || (Math.Abs((double)(interval.A - interval.B)!) < 2 && rootsCount == 1))
             {
-                intervals.Add(interval);
+                intervals.Add((interval, rootsCount));
             }
             // > 1 root
             else if(rootsCount > 1 || Math.Abs((double)(interval.A - interval.B)!) > 2)
@@ -503,7 +521,7 @@ namespace PolynomialCore
 
             foreach(var root in derivative.Roots!)
             {
-                var newPoint = new Point(root, this.y(root));
+                var newPoint = new Point(root.Value, this.y(root.Value));
                 ExtremeValues.Add(newPoint);
             }
         }

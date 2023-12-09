@@ -18,16 +18,16 @@ namespace PolynomialAppUI
             if (poly == null)
                 return "";
 
-            List<double>? roots = poly.Roots;
+            List<Root>? roots = poly.Roots;
 
             if (roots == null)
                 return "";
 
             string s = "";
 
-            foreach (double root in roots)
+            foreach (var root in roots)
             {
-                s += root.ToString("0.######");
+                s += root.Value.ToString("0.######");
                 s += "; ";
             }
 

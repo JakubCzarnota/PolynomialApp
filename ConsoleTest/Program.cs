@@ -23,7 +23,7 @@ namespace ConsoleTest
 
             foreach (var root in w1.Roots!)
             {
-                Console.Write(root.ToString("F5") + ", ");
+                Console.Write(root.Value.ToString("F5") + ", ");
             }
 
         }
