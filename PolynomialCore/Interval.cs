@@ -6,20 +6,50 @@ using System.Threading.Tasks;
 
 namespace PolynomialCore
 {
+    /// <summary>
+    /// Represents an interval <A; B> or (A; B) etc
+    /// If A or B is null they are respectively -∞ and +∞
+    /// </summary>
     public class Interval
     {
 
-        public double A { get; set; }
+        public double? A { get; set; }
 
-        public double B { get; set; }
+        public bool isAClosed { get; set; } = false;
 
-        public Interval(double a, double b)
+        public double? B { get; set; }
+
+        public bool isBClosed { get; set; } = false;
+
+        public Interval(double? a, double? b)
         {
             A = a;
             B = b;
         }
 
+        public Interval(double? a, bool isAClosed, double? b, bool isBClosed)
+        {
+            A = a;
+            this.isAClosed = isAClosed;
+            B = b;
+            this.isBClosed = isBClosed;
+        }
+
         public bool contains(double x) => x >= A && x <= B;
 
+        public override string ToString()
+        {
+            string s = "";
+
+            s += isAClosed ? "<" : "(";
+            s += A == null ? "-∞" : A;
+
+            s += "; ";
+
+            s += B == null ? "+∞" : B;
+            s += isBClosed ? ">" : ")";
+
+            return s;
+        }
     }
 }

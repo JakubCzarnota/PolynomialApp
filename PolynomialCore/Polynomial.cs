@@ -345,7 +345,7 @@ namespace PolynomialCore
 
             foreach (var interval in intervalsWithRoots)
             {
-                double root = (interval.A + interval.B) / 2;
+                double root = (double)((interval.A + interval.B) / 2)!;
 
                 for (int i = 0; i < 10000; i++)
                 {
@@ -414,17 +414,17 @@ namespace PolynomialCore
             var rootsCount = getRootsCountInInterval(interval, sturmSequence);
 
             // 1 root
-            if (Math.Abs(interval.A - interval.B) < 0.01 
-                || (Math.Abs(interval.A - interval.B) < 2 && rootsCount == 1))
+            if (Math.Abs((double)(interval.A - interval.B)!) < 0.01 
+                || (Math.Abs((double)(interval.A - interval.B)!) < 2 && rootsCount == 1))
             {
                 intervals.Add(interval);
             }
             // > 1 root
-            else if(rootsCount > 1 || Math.Abs(interval.A - interval.B) > 2)
+            else if(rootsCount > 1 || Math.Abs((double)(interval.A - interval.B)!) > 2)
             {
                 double[] newInterval1 = new double[2];
                 
-                double c = (interval.A + interval.B) / 2;
+                double c = (double)((interval.A + interval.B) / 2)!;
 
                 foreach (var i in findIntervalsWithRoots(new Interval(interval.A, c), sturmSequence))
                 {
@@ -455,7 +455,7 @@ namespace PolynomialCore
 
             for (int i = 0; i < sturmSequence.Count; i++)
             {
-                var value = sturmSequence[i].y(interval.A);
+                var value = sturmSequence[i].y((double)interval.A!);
 
                 if(value != 0)
                     yForA.Add(value);
@@ -473,7 +473,7 @@ namespace PolynomialCore
 
             for (int i = 0; i < sturmSequence.Count; i++)
             {
-                var value = sturmSequence[i].y(interval.B);
+                var value = sturmSequence[i].y((double)interval.B!);
 
                 if (value != 0)
                     yForB.Add(value);
