@@ -20,7 +20,7 @@ namespace PolynomialAppUI
 
             List<Root>? roots = poly.Roots;
 
-            if (roots == null)
+            if (roots == null || roots.Count == 0)
                 return "";
 
             string s = "";

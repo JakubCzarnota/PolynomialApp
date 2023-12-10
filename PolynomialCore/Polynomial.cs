@@ -260,10 +260,10 @@ namespace PolynomialCore
 
                 foreach (var root2 in newPoly.Roots!)
                 {
-                    Roots.Add(root2);
+                    addRoot(root2.Value, root2.Multiplicity);
                 }
 
-                Roots.Sort();
+                Roots = Roots.OrderBy(r => r.Value).ToList();
 
                 return;
             }
@@ -303,10 +303,10 @@ namespace PolynomialCore
 
                             foreach (var root2 in newPoly.Roots!)
                             {
-                                Roots.Add(root2);
+                                addRoot(root2.Value, root2.Multiplicity);
                             }
 
-                            Roots.Sort();
+                            Roots = Roots.OrderBy(r => r.Value).ToList();
 
                             return;
 
@@ -326,10 +326,10 @@ namespace PolynomialCore
 
                             foreach (var root2 in newPoly.Roots!)
                             {
-                                Roots.Add(root2);
+                                addRoot(root2.Value, root2.Multiplicity);
                             }
 
-                            Roots.Sort();
+                            Roots = Roots.OrderBy(r => r.Value).ToList();
 
                             return;
 
@@ -361,7 +361,7 @@ namespace PolynomialCore
                 addRoot(root, multiplicity);
             }
 
-            Roots.Sort();
+            Roots = Roots.OrderBy(r => r.Value).ToList();
 
         }
 

@@ -1,4 +1,7 @@
-﻿using PolynomialCore;
+﻿using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.SkiaSharpView;
+using PolynomialCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +42,21 @@ namespace PolynomialAppUI
             set
             {
                 _polynomialFormula = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ISeries[] _series = { new LineSeries<ObservablePoint>()};
+
+        public ISeries[] Series
+        {
+            get
+            {
+                return _series;
+            }
+            set
+            {
+                _series = value;
                 OnPropertyChanged();
             }
         }

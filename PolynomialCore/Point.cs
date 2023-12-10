@@ -10,7 +10,7 @@ namespace PolynomialCore
     {
         public double X { get; set; }
 
-        private double Y { get; set; }
+        public double Y { get; set; }
 
         public Point(double x, double y)
         {

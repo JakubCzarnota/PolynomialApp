@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PolynomialAppUI"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
         Background="#313952"
         Title="Polynomial App" MinHeight="810" MinWidth="1440">
@@ -65,6 +66,11 @@
             
         </StackPanel>
 
+        <lvc:CartesianChart
+            Grid.Row="1"
+            Grid.Column="1"
+            Series="{Binding Series}">
+        </lvc:CartesianChart>
 
         <StackPanel
             Grid.Row="2"
