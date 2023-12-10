@@ -77,24 +77,24 @@ namespace PolynomialCore
                             temp2 += c;
                         }
 
-                        coefficients[int.Parse(temp2)] += Double.Parse(temp);
+                        coefficients[int.Parse(temp2)] += parseCoefficient(temp);
                         temp = "" + c;
 
                     }
                     else
                     {
-                        coefficients[1] += Double.Parse(temp);
+                        coefficients[1] += parseCoefficient(temp);
                         temp = "";
                     }
                 }
                 else if (((polynomial.Length - 1) - i > 1 && (polynomial[i + 1] == '+' || polynomial[i + 1] == '-')))
                 {
-                    coefficients[0] += Double.Parse(temp);
+                    coefficients[0] += parseCoefficient(temp);
                 }
                 else if (i == polynomial.Length - 1)
                 {
                     temp += c;
-                    coefficients[0] += Double.Parse(temp);
+                    coefficients[0] += parseCoefficient(temp);
                 }
                 else
                 {
@@ -105,6 +105,21 @@ namespace PolynomialCore
 
             return coefficients;
 
+        }
+
+        /// <summary>
+        /// Parses string coefficient to double coefficient
+        /// </summary>
+        /// <param name="coefficient">Coefficient as string</param>
+        /// <returns>Coefficient as double</returns>
+        private double parseCoefficient(string coefficient)
+        {
+            if (coefficient == "" || coefficient == "+")
+                return 1;
+            else if (coefficient == "-")
+                return -1;
+            else
+                return Double.Parse(coefficient);
         }
 
         /// <summary>
