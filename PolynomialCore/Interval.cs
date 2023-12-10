@@ -21,10 +21,12 @@ namespace PolynomialCore
 
         public bool isBClosed { get; set; } = false;
 
-        public Interval(double? a, double? b)
+        public Interval(double? a, double? b, bool autoClose = false)
         {
             A = a;
+            isAClosed = a == null ? false : autoClose;
             B = b;
+            isBClosed = b == null ? false : autoClose;
         }
 
         public Interval(double? a, bool isAClosed, double? b, bool isBClosed)
@@ -42,11 +44,11 @@ namespace PolynomialCore
             string s = "";
 
             s += isAClosed ? "<" : "(";
-            s += A == null ? "-∞" : A;
+            s += A == null ? "-∞" : ((double)A).ToString("0.#####");
 
             s += "; ";
 
-            s += B == null ? "+∞" : B;
+            s += B == null ? "+∞" : ((double)B).ToString("0.#####");
             s += isBClosed ? ">" : ")";
 
             return s;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace PolynomialCore
         public List<Root>? Roots {  get; private set; }
 
         public List<Point>? ExtremeValues { get; private set; }
+
+        public (List<Interval> increasing, List<Interval> decreasing)? Monotinicity { get; private set; }
 
         public Polynomial(string polynomial) {
 
@@ -539,6 +542,65 @@ namespace PolynomialCore
                 var newPoint = new Point(root.Value, this.y(root.Value));
                 ExtremeValues.Add(newPoint);
             }
+        }
+
+        /// <summary>
+        /// Finds monotinicity of this polynomial's function
+        /// </summary>
+        public void findMonotinicity()
+        {
+            if (Roots == null)
+                findRoots();
+
+            if(ExtremeValues ==  null)
+                findExtremeValues();
+
+            List<Interval> increasing = new List<Interval>();
+            List<Interval> decreasing = new List<Interval>();
+
+            // multiplicity = 0 for ExtremeValues
+            List<(double x, int multiplicity)> points = new List<(double x, int multiplicity)>();
+
+            foreach (var root in Roots!)
+            {
+                points.Add((root.Value, root.Multiplicity));
+            }
+
+            foreach (var extremeValue in ExtremeValues!)
+            {
+                points.Add((extremeValue.X, 0));
+            }
+
+            points = points.DistinctBy(p => p.x).OrderBy(points => points.x).Reverse().ToList();
+
+            bool isIncreasing = Coefficients[Coefficients.Length - 1] > 0;
+
+            double? b = null;
+
+            foreach(var point in points)
+            {
+                if(point.multiplicity % 2 == 0)
+                {
+                    if (isIncreasing)
+                        increasing.Add(new Interval(point.x, b, true));
+                    else
+                        decreasing.Add(new Interval(point.x, b, true));
+
+                    b = point.x;
+                    isIncreasing = !isIncreasing;
+                }
+            }
+
+            if (isIncreasing)
+                increasing.Add(new Interval(null, b, true));
+            else
+                decreasing.Add(new Interval(null, b, true));
+
+            increasing.Reverse();
+            decreasing.Reverse();
+
+            Monotinicity = (increasing, decreasing);
+
         }
 
         public static Polynomial operator -(Polynomial a)
