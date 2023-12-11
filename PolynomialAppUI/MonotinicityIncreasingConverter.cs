@@ -15,7 +15,7 @@ namespace PolynomialAppUI
         {
             var poly = value as Polynomial;
 
-            string s = "f(x)↑∈";
+            string s = "f(x)↑⇔x∈";
 
             if (poly == null || poly.Monotinicity == null || poly.Monotinicity.Value.increasing.Count() < 1)
                 return s + "∅";
