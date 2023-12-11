@@ -27,6 +27,10 @@ namespace PolynomialCore
 
         public (List<Interval> increasing, List<Interval> decreasing)? Monotinicity { get; private set; }
 
+        public List<Interval>? PositiveValues { get; private set; }
+
+        public List<Interval>? NegativeValues { get; private set; }
+
         public Polynomial(string polynomial) {
 
             polynomial = polynomial.Replace(" ", "");
@@ -601,6 +605,49 @@ namespace PolynomialCore
 
             Monotinicity = (increasing, decreasing);
 
+        }
+
+        /// <summary>
+        /// Finds for which x, y is positive and  for which x, y is negative
+        /// </summary>
+        public void findPositiveAndNegativeValuse()
+        {
+            List<Interval> positiveValues = new List<Interval>();
+            List<Interval> negativeValues = new List<Interval>();
+
+            if (Roots == null)
+                findRoots();
+
+            bool isPositive = Coefficients[Coefficients.Length -1 ] > 0;
+
+            double? b = null;
+
+            for (int i = Roots!.Count - 1; i >= 0; i--)
+            {
+                var root = Roots[i];
+
+                if (isPositive)
+                    positiveValues.Add(new Interval(root.Value, b));
+                else
+                    negativeValues.Add(new Interval(root.Value, b));
+
+                b = root.Value;
+
+                if (root.Multiplicity % 2 != 0)
+                    isPositive = !isPositive;
+                
+            }
+
+            if (isPositive)
+                positiveValues.Add(new Interval(null, b));
+            else
+                negativeValues.Add(new Interval(null, b));
+
+            positiveValues.Reverse();
+            negativeValues.Reverse();
+
+            PositiveValues = positiveValues;
+            NegativeValues = negativeValues;
         }
 
         public static Polynomial operator -(Polynomial a)

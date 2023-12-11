@@ -17,6 +17,8 @@
             <local:RootsConverter x:Key="RootsConverter"/>
             <local:MonotinicityIncreasingConverter x:Key="MonotinicityIncreasingConverter"/>
             <local:MonotinicityDecreasingConverter x:Key="MonotinicityDecreasingConverter"/>
+            <local:PositiveValuesConverter x:Key="PositiveValuesConverter"/>
+            <local:NegativeValuesConverter x:Key="NegativeValuesConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -77,6 +79,21 @@
                     Style="{StaticResource Value}"
                     DataContext="{Binding Polynomial}"
                     Text="{Binding Converter={StaticResource MonotinicityDecreasingConverter}}"/>
+
+                <TextBlock
+                    Style="{StaticResource Title}"
+                    Text="Polynomial's f(x) values:"/>
+
+                <TextBlock
+                    Style="{StaticResource Value}"
+                    DataContext="{Binding Polynomial}"
+                    Text="{Binding Converter={StaticResource PositiveValuesConverter}}"/>
+
+                <TextBlock
+                    Style="{StaticResource Value}"
+                    DataContext="{Binding Polynomial}"
+                    Text="{Binding Converter={StaticResource NegativeValuesConverter}}"/>
+
 
             </StackPanel>
             
