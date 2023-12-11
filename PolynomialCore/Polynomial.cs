@@ -839,15 +839,38 @@ namespace PolynomialCore
             if(Coefficients.Length >= 1)
                 st += Coefficients[Coefficients.Length - 1] + "x^" + (Coefficients.Length - 1);
 
-            for (int i = Coefficients.Length - 2; i >= 0; i--)
+            for (int i = Coefficients.Length - 2; i >= 2; i--)
             {
                 double coefficient = Coefficients[i];
+                if (coefficient != 0)
+                { 
+                    if (coefficient >= 0)
+                        st += "+";
+
+                    st += coefficient + "x^" + i;
+                }
+            }
+
+            if(Coefficients.Length >= 2 && Coefficients[1] != 0)
+            {
+                double coefficient = Coefficients[1];
 
                 if (coefficient >= 0)
                     st += "+";
 
-                st += coefficient + "x^" + i;
+                st += coefficient + "x";
             }
+
+            if (Coefficients.Length >= 1 && Coefficients[0] != 0)
+            {
+                double coefficient = Coefficients[0];
+
+                if (coefficient >= 0)
+                    st += "+";
+
+                st += coefficient;
+            }
+
 
             return st;
 
