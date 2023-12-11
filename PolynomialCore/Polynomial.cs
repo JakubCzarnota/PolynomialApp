@@ -21,6 +21,8 @@ namespace PolynomialCore
 
         public double[] Coefficients { get; private set; }
 
+        public Interval? ValuesSet { get; private set; }
+
         public List<Root>? Roots {  get; private set; }
 
         public List<Point>? ExtremeValues { get; private set; }
@@ -648,6 +650,44 @@ namespace PolynomialCore
 
             PositiveValues = positiveValues;
             NegativeValues = negativeValues;
+        }
+
+        /// <summary>
+        /// Finds this set of values of this polynomial
+        /// </summary>
+        public void findValuesSet()
+        {
+
+            if (PositiveValues == null || NegativeValues == null)
+                findPositiveAndNegativeValuse();
+
+            double? a = null;
+            double? b = null;
+
+            //looking for a
+            if (!((Monotinicity!.Value.increasing.Count > 0 && Monotinicity!.Value.increasing.First().A == null) || (Monotinicity!.Value.decreasing.Count > 0 && Monotinicity!.Value.decreasing.Last().B == null)))
+            {
+                var minValue = ExtremeValues!.MinBy(e => e.Y);
+
+                a = minValue == null ? null : minValue.Y;
+
+                if (Roots!.Count > 0 && (a == null || a > 0)) 
+                    a = 0;
+
+            }
+
+            //looking for b
+            if (!((Monotinicity!.Value.decreasing.Count > 0 && Monotinicity!.Value.decreasing.First().A == null) || (Monotinicity!.Value.increasing.Count > 0 && Monotinicity!.Value.increasing.Last().B == null)))  
+            {
+                var minValue = ExtremeValues!.MaxBy(e => e.Y);
+
+                b = minValue == null ? null : minValue.Y;
+
+                if (Roots!.Count > 0 && (b == null || a < 0))
+                    b = 0;
+            }
+
+            ValuesSet = new Interval(a, b, true);
         }
 
         public static Polynomial operator -(Polynomial a)
