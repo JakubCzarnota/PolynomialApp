@@ -1,6 +1,7 @@
 ﻿using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.WPF;
 using PolynomialCore;
 using System.Text;
 using System.Windows;
@@ -51,6 +52,16 @@ namespace PolynomialAppUI
                 series[0] = getLineSeries(newPoly);
 
                 _dataContext.Series = series;
+
+                var chart = (CartesianChart)FindName("chart");
+
+
+                chart.YAxes.First().MinLimit = null;
+                chart.YAxes.First().MaxLimit = null;
+
+                chart.XAxes.First().MinLimit = null;
+                chart.XAxes.First().MaxLimit = null;
+                
             }
             catch (Exception)
             {
@@ -85,6 +96,8 @@ namespace PolynomialAppUI
 
             var edgeValue = Math.Abs(left) > Math.Abs(right) ? Math.Abs(left) : Math.Abs(right);
 
+            edgeValue = Math.Ceiling(edgeValue);
+
             List<ObservablePoint> points = new List<ObservablePoint>();
 
             points.Add(new ObservablePoint(-edgeValue, poly.y(-edgeValue)));
@@ -109,6 +122,7 @@ namespace PolynomialAppUI
                 Values = points.Distinct().OrderBy(p => p.X).ToArray(),
 
                 LineSmoothness = 0.75,
+
 
                 YToolTipLabelFormatter = (charPoint) =>
                 {

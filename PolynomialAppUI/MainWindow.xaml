@@ -112,7 +112,9 @@
         <lvc:CartesianChart
             Grid.Row="1"
             Grid.Column="1"
-            Series="{Binding Series}">
+            x:Name="chart"
+            Series="{Binding Series}"
+            ZoomMode="Both">
         </lvc:CartesianChart>
 
         <StackPanel
