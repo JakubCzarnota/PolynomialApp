@@ -13,25 +13,22 @@ namespace PolynomialAppUI
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Polynomial? poly = value as Polynomial;
+            var poly = value as Polynomial;
 
-            if (poly == null)
-                return "";
+            string s = "x∈";
 
-            List<Root>? roots = poly.Roots;
+            if (poly == null || poly.Roots == null || poly.Roots.Count == 0)
+                return s + "Ø";
 
-            if (roots == null || roots.Count == 0)
-                return "";
+            s += "{";
 
-            string s = "";
-
-            foreach (var root in roots)
+            foreach (var root in poly.Roots)
             {
                 s += root.Value.ToString("0.######");
                 s += "; ";
             }
 
-           s = s.Substring(0, s.Length - 2);
+           s = s.Substring(0, s.Length - 2) + "}";
 
             return s;
         }
