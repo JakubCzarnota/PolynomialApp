@@ -839,10 +839,7 @@ namespace PolynomialCore
         {
             string st = "";
 
-            if(Coefficients.Length >= 1)
-                st += Coefficients[Coefficients.Length - 1] + "x^" + (Coefficients.Length - 1);
-
-            for (int i = Coefficients.Length - 2; i >= 2; i--)
+            for (int i = Coefficients.Length - 1; i >= 2; i--)
             {
                 double coefficient = Coefficients[i];
                 if (coefficient != 0)
@@ -874,6 +871,8 @@ namespace PolynomialCore
                 st += coefficient;
             }
 
+            if (st.Length > 1 && st[0] == '+') 
+                st = st.Substring(1);
 
             return st;
 

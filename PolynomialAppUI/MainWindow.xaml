@@ -118,6 +118,56 @@
         </lvc:CartesianChart>
 
         <StackPanel
+            Grid.Row="1"
+            Grid.Column="2"
+            VerticalAlignment="Center"
+            Orientation="Vertical"
+             Margin="15">
+
+            <TextBox
+                x:Name="FormulaInput2"
+                VerticalAlignment="Center"
+                Margin="5"
+                Style="{StaticResource FormulaInput}"
+                Text="{Binding SecondPolynomialFormula, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="FormulaInput2_DataContextTextChanged"/>
+
+            <Button
+                x:Name="Add"
+                Content="+"
+                Style="{StaticResource Button}"
+                Click="Add_Click"/>
+
+            <Button
+                x:Name="Subtract"
+                Content="-"
+                Style="{StaticResource Button}"
+                Click="Subtract_Click"/>
+
+            <Button
+                x:Name="Multiply"
+                Content="*"
+                Style="{StaticResource Button}"
+                Click="Multiply_Click"/>
+
+            <Button
+                x:Name="Devide"
+                Content="/"
+                Style="{StaticResource Button}"
+                Click="Devide_Click"/>
+
+            <TextBlock
+                Foreground="white"
+                FontSize="18"
+                TextAlignment="Center"
+                Padding="5">
+                <Run Text="Rest:"/>
+                <Run Text="{Binding Rest}"/>
+            </TextBlock>
+
+        </StackPanel>
+
+        <StackPanel
             Grid.Row="2"
             Grid.Column="1"
             VerticalAlignment="Center"

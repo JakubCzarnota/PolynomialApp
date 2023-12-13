@@ -11,12 +11,22 @@
         <Setter Property="FontSize" Value="23"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="Margin" Value="2"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
     </Style>
 
     <Style x:Key="FormulaInput" TargetType="TextBox">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="Padding" Value="5"/>
+    </Style>
+
+    <Style x:Key="Button" TargetType="Button">
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="23"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="10"/>
     </Style>
     
 </ResourceDictionary>

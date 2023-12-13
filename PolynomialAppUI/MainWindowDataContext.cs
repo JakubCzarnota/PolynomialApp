@@ -46,6 +46,51 @@ namespace PolynomialAppUI
             }
         }
 
+        private Polynomial? _secondPolynomial;
+
+        public Polynomial? SecondPolynomial
+        {
+            get
+            {
+                return _secondPolynomial;
+            }
+            set
+            {
+                _secondPolynomial = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _secondPolynomialFormula = "";
+
+        public string SecondPolynomialFormula
+        {
+            get
+            {
+                return _secondPolynomialFormula;
+            }
+            set
+            {
+                _secondPolynomialFormula = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _rest = "";
+
+        public string Rest
+        {
+            get
+            {
+                return _rest;
+            }
+            set
+            {
+                _rest = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ISeries[] _series = { new LineSeries<ObservablePoint>()};
 
         public ISeries[] Series

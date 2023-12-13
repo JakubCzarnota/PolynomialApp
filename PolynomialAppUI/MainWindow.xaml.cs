@@ -132,5 +132,66 @@ namespace PolynomialAppUI
 
             return lineSeries;
         }
+
+        private void FormulaInput2_DataContextTextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                var newPoly = new Polynomial(_dataContext.SecondPolynomialFormula);
+
+                _dataContext.SecondPolynomial = newPoly;
+            }
+            catch (Exception)
+            {
+                _dataContext.SecondPolynomial = null;
+            }
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            if(_dataContext.Polynomial != null && _dataContext.SecondPolynomial != null)
+            {
+                var newPoly = _dataContext.Polynomial + _dataContext.SecondPolynomial;
+
+                _dataContext.Polynomial = newPoly;
+                _dataContext.PolynomialFormula = _dataContext.Polynomial.ToString();
+            }
+        }
+
+        private void Subtract_Click(object sender, RoutedEventArgs e)
+        {
+            if (_dataContext.Polynomial != null && _dataContext.SecondPolynomial != null)
+            {
+                var newPoly = _dataContext.Polynomial - _dataContext.SecondPolynomial;
+
+                _dataContext.Polynomial = newPoly;
+                _dataContext.PolynomialFormula = _dataContext.Polynomial.ToString();
+            }
+        }
+
+        private void Multiply_Click(object sender, RoutedEventArgs e)
+        {
+            if (_dataContext.Polynomial != null && _dataContext.SecondPolynomial != null)
+            {
+                var newPoly = _dataContext.Polynomial * _dataContext.SecondPolynomial;
+
+                _dataContext.Polynomial = newPoly;
+                _dataContext.PolynomialFormula = _dataContext.Polynomial.ToString();
+            }
+        }
+
+        private void Devide_Click(object sender, RoutedEventArgs e)
+        {
+            if (_dataContext.Polynomial != null && _dataContext.SecondPolynomial != null)
+            {
+                Polynomial rest;
+
+                var newPoly = Polynomial.devide(_dataContext.Polynomial, _dataContext.SecondPolynomial, out rest);
+
+                _dataContext.Polynomial = newPoly;
+                _dataContext.PolynomialFormula = _dataContext.Polynomial.ToString();
+                _dataContext.Rest = rest.ToString();
+            }
+        }
     }
 }
