@@ -693,6 +693,62 @@ namespace PolynomialCore
             ValuesSet = new Interval(a, b, true);
         }
 
+        /// <summary>
+        /// Gets points for graph
+        /// </summary>
+        /// <returns>Array of points</returns>
+        public Point[] getPointsForGraph()
+        {
+            if (Roots == null)
+                findRoots();
+
+            if (ExtremeValues == null)
+                findExtremeValues();
+
+            List<Point> points = new List<Point>();
+
+            foreach (var root in Roots!)
+            {
+                points.Add(new Point(root.Value, 0));
+            }
+
+            foreach (var extremeValue in ExtremeValues!) 
+            {
+                points.Add(extremeValue);
+            }
+
+            double left = -2;
+            double right = 2;
+
+            if (Roots != null && ExtremeValues != null && Roots.Count > 0 && ExtremeValues.Count > 0)
+            {
+                left = Roots[0].Value < ExtremeValues![0].X ? Roots[0].Value - 2 : ExtremeValues[0].X - 2;
+
+                right = Roots.Last().Value > ExtremeValues!.Last().X ? Roots.Last().Value + 2 : ExtremeValues.Last().X + 2;
+            }
+            else if (Roots != null && Roots.Count > 0)
+            {
+                left = Roots[0].Value - 2;
+
+                right = Roots.Last().Value + 2;
+            }
+            else if (ExtremeValues != null && ExtremeValues.Count > 0)
+            {
+                left = ExtremeValues[0].X - 2;
+
+                right = ExtremeValues.Last().X + 2;
+            }
+
+            var edgeValue = Math.Abs(left) > Math.Abs(right) ? Math.Abs(left) : Math.Abs(right);
+
+            edgeValue = Math.Ceiling(edgeValue);
+
+            points.Add(new Point(-edgeValue, this.y(-edgeValue)));
+            points.Add(new Point(edgeValue, this.y(edgeValue)));
+
+            return points.DistinctBy(p => p.X).OrderBy(p => p.X).ToArray();
+        }
+
         public static Polynomial operator -(Polynomial a)
         {
             Polynomial newPoly =  new Polynomial(a.Coefficients);
