@@ -545,8 +545,11 @@ namespace PolynomialCore
 
             foreach(var root in derivative.Roots!)
             {
-                var newPoint = new Point(root.Value, this.y(root.Value));
-                ExtremeValues.Add(newPoint);
+                if(root.Multiplicity % 2 != 0)
+                {
+                    var newPoint = new Point(root.Value, this.y(root.Value));
+                    ExtremeValues.Add(newPoint);
+                }
             }
         }
 
