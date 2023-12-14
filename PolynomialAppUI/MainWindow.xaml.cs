@@ -44,11 +44,11 @@ namespace PolynomialAppUI
 
                 var newPoly = new Polynomial(_dataContext.PolynomialFormula);
 
-                newPoly.findRoots();
-                newPoly.findExtremeValues();
-                newPoly.findMonotinicity();
-                newPoly.findPositiveAndNegativeValuse();
-                newPoly.findValuesSet();
+                newPoly.FindRoots();
+                newPoly.FindExtremeValues();
+                newPoly.FindMonotinicity();
+                newPoly.FindPositiveAndNegativeValuse();
+                newPoly.FindValuesSet();
 
                 _dataContext.Polynomial = newPoly;
 
@@ -103,7 +103,7 @@ namespace PolynomialAppUI
 
             List<ObservablePoint> points = new List<ObservablePoint>();
 
-            points.Add(new ObservablePoint(-edgeValue, poly.y(-edgeValue)));
+            points.Add(new ObservablePoint(-edgeValue, poly.Y(-edgeValue)));
 
             if (poly.Roots != null)
                 foreach (var root in poly.Roots)
@@ -117,7 +117,7 @@ namespace PolynomialAppUI
                     points.Add(new ObservablePoint(extremeValue.X, extremeValue.Y));
                 }
 
-            points.Add(new ObservablePoint(edgeValue, poly.y(edgeValue)));
+            points.Add(new ObservablePoint(edgeValue, poly.Y(edgeValue)));
 
             var lineSeries = new LineSeries<ObservablePoint>()
             {
@@ -189,7 +189,7 @@ namespace PolynomialAppUI
             {
                 Polynomial rest;
 
-                var newPoly = Polynomial.devide(_dataContext.Polynomial, _dataContext.SecondPolynomial, out rest);
+                var newPoly = Polynomial.Devide(_dataContext.Polynomial, _dataContext.SecondPolynomial, out rest);
 
                 _dataContext.Polynomial = newPoly;
                 _dataContext.PolynomialFormula = _dataContext.Polynomial.ToString();

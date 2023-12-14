@@ -13,7 +13,7 @@ namespace ConsoleTest
             
             Polynomial w1 = new Polynomial(input);
 
-            w1.findRoots();
+            w1.FindRoots();
 
 
             Console.WriteLine("W(x)=" + w1);

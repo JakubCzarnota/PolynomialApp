@@ -68,7 +68,7 @@ namespace PolynomialCore
 
             polynomial = polynomial.Replace(" ", "");
 
-            Coefficients = findCoefficients(polynomial);
+            Coefficients = FindCoefficients(polynomial);
                   
 
         }
@@ -96,10 +96,10 @@ namespace PolynomialCore
         /// </summary>
         /// <param name="polynomial">String of polynomial formula</param>
         /// <returns>Array of coefficients</returns>
-        private double[] findCoefficients(string polynomial)
+        private double[] FindCoefficients(string polynomial)
         {
 
-            int degree = findDegree(polynomial);
+            int degree = FindDegree(polynomial);
 
             double[] coefficients = new double[degree+1];
 
@@ -125,24 +125,24 @@ namespace PolynomialCore
                             temp2 += c;
                         }
 
-                        coefficients[int.Parse(temp2)] += parseCoefficient(temp);
+                        coefficients[int.Parse(temp2)] += ParseCoefficient(temp);
                         temp = "" + c;
 
                     }
                     else
                     {
-                        coefficients[1] += parseCoefficient(temp);
+                        coefficients[1] += ParseCoefficient(temp);
                         temp = "";
                     }
                 }
                 else if (((polynomial.Length - 1) - i > 1 && (polynomial[i + 1] == '+' || polynomial[i + 1] == '-')))
                 {
-                    coefficients[0] += parseCoefficient(temp);
+                    coefficients[0] += ParseCoefficient(temp);
                 }
                 else if (i == polynomial.Length - 1)
                 {
                     temp += c;
-                    coefficients[0] += parseCoefficient(temp);
+                    coefficients[0] += ParseCoefficient(temp);
                 }
                 else
                 {
@@ -160,7 +160,7 @@ namespace PolynomialCore
         /// </summary>
         /// <param name="coefficient">Coefficient as string</param>
         /// <returns>Coefficient as double</returns>
-        private double parseCoefficient(string coefficient)
+        private double ParseCoefficient(string coefficient)
         {
             if (coefficient == "" || coefficient == "+")
                 return 1;
@@ -175,7 +175,7 @@ namespace PolynomialCore
         /// </summary>
         /// <param name="polynomial">String of polynomial formula</param>
         /// <returns>Degree</returns>
-        private int findDegree(string polynomial)
+        private int FindDegree(string polynomial)
         {
             int degree = -1;
 
@@ -221,7 +221,7 @@ namespace PolynomialCore
         /// </summary>
         /// <param name="x">x</param>
         /// <returns>Value of y</returns>
-        public double y(double x)
+        public double Y(double x)
         {
             double y = 0;
 
@@ -237,7 +237,7 @@ namespace PolynomialCore
         /// Gets derivative of this polynomial
         /// </summary>
         /// <returns>Derivative</returns>
-        private Polynomial getDerivative()
+        private Polynomial GetDerivative()
         {
             Polynomial newPoly = new Polynomial(Degree - 1);
 
@@ -253,12 +253,12 @@ namespace PolynomialCore
         /// Gets Sturm sequence for this polynomial 
         /// </summary>
         /// <returns>Sturm sequence</returns>
-        private List<Polynomial> getSturmSequence()
+        private List<Polynomial> GetSturmSequence()
         {
             List<Polynomial> sequence = new List<Polynomial>();
 
             sequence.Add(this);
-            sequence.Add(getDerivative());
+            sequence.Add(GetDerivative());
 
             while(sequence.Last().Degree > 0)
             {
@@ -275,7 +275,7 @@ namespace PolynomialCore
         /// <summary>
         /// Finds roots of this polynomial and assigns them to Roots property
         /// </summary>
-        public void findRoots()
+        public void FindRoots()
         {
             Roots = new List<Root>();
 
@@ -297,14 +297,14 @@ namespace PolynomialCore
                     var x1 = (-b - deltaSqrt) / (2 * a);
                     var x2 = (-b + deltaSqrt) / (2 * a);
 
-                    addRoot(x1);
-                    addRoot(x2);
+                    AddRoot(x1);
+                    AddRoot(x2);
                 }
                 else if(delta == 0)
                 {
                     var x0 = -b / (2 * a);
 
-                    addRoot(x0, 2);
+                    AddRoot(x0, 2);
                 }
 
                 return;
@@ -319,11 +319,11 @@ namespace PolynomialCore
 
                 var newPoly = this / new Polynomial(newCoefficients);
 
-                newPoly.findRoots();
+                newPoly.FindRoots();
 
                 foreach (var root2 in newPoly.Roots!)
                 {
-                    addRoot(root2.Value, root2.Multiplicity);
+                    AddRoot(root2.Value, root2.Multiplicity);
                 }
 
                 Roots = Roots.OrderBy(r => r.Value).ToList();
@@ -345,8 +345,8 @@ namespace PolynomialCore
 
             if (areAllCoefficientsInteger)
             {
-                var ps = getDivisors((int)Coefficients[0]);
-                var qs = getDivisors((int)Coefficients[Coefficients.Length-1]);
+                var ps = GetDivisors((int)Coefficients[0]);
+                var qs = GetDivisors((int)Coefficients[Coefficients.Length-1]);
 
                 foreach (double p in ps)
                 {
@@ -354,19 +354,19 @@ namespace PolynomialCore
                     {
                         double root = p / q;
 
-                        if(this.y(root) == 0)
+                        if(this.Y(root) == 0)
                         {
-                            addRoot(root);
+                            AddRoot(root);
 
                             double[] newCoefficients = {-root, 1};
 
                             var newPoly = this / new Polynomial(newCoefficients);
 
-                            newPoly.findRoots();
+                            newPoly.FindRoots();
 
                             foreach (var root2 in newPoly.Roots!)
                             {
-                                addRoot(root2.Value, root2.Multiplicity);
+                                AddRoot(root2.Value, root2.Multiplicity);
                             }
 
                             Roots = Roots.OrderBy(r => r.Value).ToList();
@@ -377,19 +377,19 @@ namespace PolynomialCore
 
                         root = -(p / q);
 
-                        if (this.y(root) == 0)
+                        if (this.Y(root) == 0)
                         {
-                            addRoot(root);
+                            AddRoot(root);
 
                             double[] newCoefficients = {-root, 1};
 
                             var newPoly = this / new Polynomial(newCoefficients);
 
-                            newPoly.findRoots();
+                            newPoly.FindRoots();
 
                             foreach (var root2 in newPoly.Roots!)
                             {
-                                addRoot(root2.Value, root2.Multiplicity);
+                                AddRoot(root2.Value, root2.Multiplicity);
                             }
 
                             Roots = Roots.OrderBy(r => r.Value).ToList();
@@ -402,11 +402,11 @@ namespace PolynomialCore
                 }
             }
 
-            var derivative = getDerivative();
+            var derivative = GetDerivative();
 
-            var sturmSequence = getSturmSequence();
+            var sturmSequence = GetSturmSequence();
 
-            var intervalsWithRoots = findIntervalsWithRoots(new Interval(-100, 100), sturmSequence);
+            var intervalsWithRoots = FindIntervalsWithRoots(new Interval(-100, 100), sturmSequence);
 
             foreach (var intervalsWithRoot in intervalsWithRoots)
             {
@@ -417,11 +417,11 @@ namespace PolynomialCore
 
                 for (int i = 0; i < 10000; i++)
                 {
-                    root = newtonRaphson(root, derivative);
+                    root = NewtonRaphson(root, derivative);
                 }
 
 
-                addRoot(root, multiplicity);
+                AddRoot(root, multiplicity);
             }
 
             Roots = Roots.OrderBy(r => r.Value).ToList();
@@ -433,7 +433,7 @@ namespace PolynomialCore
         /// </summary>
         /// <param name="value">Value of root</param>
         /// <param name="multiplicity">Multiplicity of root</param>
-        private void addRoot(double value, int multiplicity = 1)
+        private void AddRoot(double value, int multiplicity = 1)
         {
             var root = Roots!.Find(r => r.Value == value);
 
@@ -448,7 +448,7 @@ namespace PolynomialCore
         /// </summary>
         /// <param name="x">Number to divide</param>
         /// <returns>List of x divisors</returns>
-        public List<int> getDivisors(int x)
+        private List<int> GetDivisors(int x)
         {
             x = Math.Abs(x); 
 
@@ -479,10 +479,7 @@ namespace PolynomialCore
         /// <param name="x0">Approximate root</param>
         /// <param name="derivative">Derivative of this polynomial</param>
         /// <returns>Approximate root</returns>
-        private double newtonRaphson(double x0, Polynomial derivative)
-        {
-            return x0 - this.y(x0) / derivative.y(x0);
-        }
+        private double NewtonRaphson(double x0, Polynomial derivative) => x0 - this.Y(x0) / derivative.Y(x0);
 
         /// <summary>
         /// Finds intervals with one root
@@ -490,11 +487,11 @@ namespace PolynomialCore
         /// <param name="interval">Interval in which function should look for intervals with one root</param>
         /// <param name="sturmSequence">Sturm sequence for this polynomial</param>
         /// <returns>Intervals with one root</returns>
-        private List<(Interval interval, int multiplicity)> findIntervalsWithRoots(Interval interval, List<Polynomial> sturmSequence)
+        private List<(Interval interval, int multiplicity)> FindIntervalsWithRoots(Interval interval, List<Polynomial> sturmSequence)
         {
             List<(Interval interval, int multiplicity)> intervals = new List<(Interval interval, int multiplicity)>();
 
-            var rootsCount = getRootsCountInInterval(interval, sturmSequence);
+            var rootsCount = GetRootsCountInInterval(interval, sturmSequence);
 
             // 1 root
             if (Math.Abs((double)(interval.A - interval.B)!) < 0.01 
@@ -509,12 +506,12 @@ namespace PolynomialCore
                 
                 double c = (double)((interval.A + interval.B) / 2)!;
 
-                foreach (var i in findIntervalsWithRoots(new Interval(interval.A, c), sturmSequence))
+                foreach (var i in FindIntervalsWithRoots(new Interval(interval.A, c), sturmSequence))
                 {
                     intervals.Add(i);
                 }
 
-                foreach (var i in findIntervalsWithRoots(new Interval(c, interval.B), sturmSequence))
+                foreach (var i in FindIntervalsWithRoots(new Interval(c, interval.B), sturmSequence))
                 {
                     intervals.Add(i);
                 }
@@ -530,7 +527,7 @@ namespace PolynomialCore
         /// <param name="interval">Interval to chcek</param>
         /// <param name="sturmSequence">Sturm sequence for this polynomial</param>
         /// <returns>Count of roots in interval</returns>
-        private int getRootsCountInInterval(Interval interval, List<Polynomial> sturmSequence)
+        private int GetRootsCountInInterval(Interval interval, List<Polynomial> sturmSequence)
         {
             int countA = 0;
 
@@ -538,7 +535,7 @@ namespace PolynomialCore
 
             for (int i = 0; i < sturmSequence.Count; i++)
             {
-                var value = sturmSequence[i].y((double)interval.A!);
+                var value = sturmSequence[i].Y((double)interval.A!);
 
                 if(value != 0)
                     yForA.Add(value);
@@ -556,7 +553,7 @@ namespace PolynomialCore
 
             for (int i = 0; i < sturmSequence.Count; i++)
             {
-                var value = sturmSequence[i].y((double)interval.B!);
+                var value = sturmSequence[i].Y((double)interval.B!);
 
                 if (value != 0)
                     yForB.Add(value);
@@ -574,19 +571,19 @@ namespace PolynomialCore
         /// <summary>
         /// Finds extreme values of this polynomial and assigns them to ExtremeValues property
         /// </summary>
-        public void findExtremeValues()
+        public void FindExtremeValues()
         {
             ExtremeValues = new List<Point>();
 
-            var derivative = getDerivative();
+            var derivative = GetDerivative();
 
-            derivative.findRoots();
+            derivative.FindRoots();
 
             foreach(var root in derivative.Roots!)
             {
                 if(root.Multiplicity % 2 != 0)
                 {
-                    var newPoint = new Point(root.Value, this.y(root.Value));
+                    var newPoint = new Point(root.Value, this.Y(root.Value));
                     ExtremeValues.Add(newPoint);
                 }
             }
@@ -595,13 +592,13 @@ namespace PolynomialCore
         /// <summary>
         /// Finds monotinicity of this polynomial's function
         /// </summary>
-        public void findMonotinicity()
+        public void FindMonotinicity()
         {
             if (Roots == null)
-                findRoots();
+                FindRoots();
 
             if(ExtremeValues ==  null)
-                findExtremeValues();
+                FindExtremeValues();
 
             List<Interval> increasing = new List<Interval>();
             List<Interval> decreasing = new List<Interval>();
@@ -654,13 +651,13 @@ namespace PolynomialCore
         /// <summary>
         /// Finds for which x, y is positive and  for which x, y is negative
         /// </summary>
-        public void findPositiveAndNegativeValuse()
+        public void FindPositiveAndNegativeValuse()
         {
             List<Interval> positiveValues = new List<Interval>();
             List<Interval> negativeValues = new List<Interval>();
 
             if (Roots == null)
-                findRoots();
+                FindRoots();
 
             bool isPositive = Coefficients[Coefficients.Length -1 ] > 0;
 
@@ -697,11 +694,11 @@ namespace PolynomialCore
         /// <summary>
         /// Finds this set of values of this polynomial
         /// </summary>
-        public void findValuesSet()
+        public void FindValuesSet()
         {
 
             if (PositiveValues == null || NegativeValues == null)
-                findPositiveAndNegativeValuse();
+                FindPositiveAndNegativeValuse();
 
             double? a = null;
             double? b = null;
@@ -736,13 +733,13 @@ namespace PolynomialCore
         /// Gets points for graph
         /// </summary>
         /// <returns>Array of points</returns>
-        public Point[] getPointsForGraph()
+        public Point[] GetPointsForGraph()
         {
             if (Roots == null)
-                findRoots();
+                FindRoots();
 
             if (ExtremeValues == null)
-                findExtremeValues();
+                FindExtremeValues();
 
             List<Point> points = new List<Point>();
 
@@ -782,8 +779,8 @@ namespace PolynomialCore
 
             edgeValue = Math.Ceiling(edgeValue);
 
-            points.Add(new Point(-edgeValue, this.y(-edgeValue)));
-            points.Add(new Point(edgeValue, this.y(edgeValue)));
+            points.Add(new Point(-edgeValue, this.Y(-edgeValue)));
+            points.Add(new Point(edgeValue, this.Y(edgeValue)));
 
             return points.DistinctBy(p => p.X).OrderBy(p => p.X).ToArray();
         }
@@ -906,7 +903,7 @@ namespace PolynomialCore
         {
             Polynomial rest;
 
-            return devide(a, b, out rest);
+            return Devide(a, b, out rest);
         }
 
         /// <summary>
@@ -919,7 +916,7 @@ namespace PolynomialCore
         {
             Polynomial rest;
 
-            devide(a, b, out rest);
+            Devide(a, b, out rest);
 
             return rest;
         }
@@ -931,7 +928,7 @@ namespace PolynomialCore
         /// <param name="b">Second polynomial</param>
         /// <param name="rest">Rest from division</param>
         /// <returns>A polynomial resulting from division</returns>
-        public static Polynomial devide(Polynomial a, Polynomial b, out Polynomial rest)
+        public static Polynomial Devide(Polynomial a, Polynomial b, out Polynomial rest)
         {
             Polynomial a1 = new Polynomial(a.Coefficients);
 

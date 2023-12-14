@@ -20,7 +20,7 @@ namespace PolynomialCore
         /// <summary>
         /// Is this interval closed on the left side
         /// </summary>
-        public bool isAClosed { get; set; } = false;
+        public bool IsAClosed { get; set; } = false;
 
         /// <summary>
         /// Right value of this interval
@@ -30,7 +30,7 @@ namespace PolynomialCore
         /// <summary>
         /// Is this interval closed on the right side
         /// </summary>
-        public bool isBClosed { get; set; } = false;
+        public bool IsBClosed { get; set; } = false;
 
         /// <summary>
         /// Generates new interval 
@@ -41,9 +41,9 @@ namespace PolynomialCore
         public Interval(double? a, double? b, bool autoClose = false)
         {
             A = a;
-            isAClosed = a == null ? false : autoClose;
+            IsAClosed = a == null ? false : autoClose;
             B = b;
-            isBClosed = b == null ? false : autoClose;
+            IsBClosed = b == null ? false : autoClose;
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace PolynomialCore
         public Interval(double? a, bool isAClosed, double? b, bool isBClosed)
         {
             A = a;
-            this.isAClosed = isAClosed;
+            this.IsAClosed = isAClosed;
             B = b;
-            this.isBClosed = isBClosed;
+            this.IsBClosed = isBClosed;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace PolynomialCore
         /// </summary>
         /// <param name="x">X value</param>
         /// <returns>True/false</returns>
-        public bool contains(double x) => x >= A && x <= B;
+        public bool Contains(double x) => x >= A && x <= B;
 
         /// <summary>
         /// Gets this interval as a string
@@ -76,13 +76,13 @@ namespace PolynomialCore
         {
             string s = "";
 
-            s += isAClosed ? "<" : "(";
+            s += IsAClosed ? "<" : "(";
             s += A == null ? "-∞" : ((double)A).ToString("0.#####");
 
             s += "; ";
 
             s += B == null ? "+∞" : ((double)B).ToString("0.#####");
-            s += isBClosed ? ">" : ")";
+            s += IsBClosed ? ">" : ")";
 
             return s;
         }
