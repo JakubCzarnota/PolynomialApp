@@ -24,6 +24,9 @@ namespace PolynomialAppUI
     {
         private readonly MainWindowDataContext _dataContext;
 
+        /// <summary>
+        /// Initialize main window
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();

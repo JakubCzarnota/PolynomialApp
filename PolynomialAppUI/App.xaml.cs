@@ -12,6 +12,10 @@ namespace PolynomialAppUI
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Entry point for the app
+        /// </summary>
+        /// <param name="e">Startup event arguments</param>
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
