@@ -1,8 +1,10 @@
 ﻿using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.WPF;
 using PolynomialCore;
+using SkiaSharp;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,8 +38,6 @@ namespace PolynomialAppUI
         {
             try
             {
-                var series = new ISeries[1];
-                _dataContext.Series = series;
 
                 var newPoly = new Polynomial(_dataContext.PolynomialFormula);
 
@@ -49,7 +49,7 @@ namespace PolynomialAppUI
 
                 _dataContext.Polynomial = newPoly;
 
-                series[0] = getLineSeries(newPoly);
+                var series = getLineSeries(newPoly);
 
                 _dataContext.Series = series;
 
@@ -70,58 +70,185 @@ namespace PolynomialAppUI
             }
         }
 
-        private LineSeries<ObservablePoint> getLineSeries(Polynomial poly)
+        private ISeries[] getLineSeries(Polynomial poly)
         {
 
-            double left = -2;
-            double right = 2;
+            var points = poly.getPointsForGraph();
 
-            if (poly.Roots != null && poly.ExtremeValues != null && poly.Roots.Count > 0 && poly.ExtremeValues.Count > 0)
+            var observablePoints = new ObservablePoint[points.Length];
+
+            for (int i = 0; i < points.Length; i++)
             {
-                left = poly.Roots[0].Value < poly.ExtremeValues![0].X ? poly.Roots[0].Value - 2 : poly.ExtremeValues[0].X - 2;
-
-                right = poly.Roots.Last().Value > poly.ExtremeValues!.Last().X ? poly.Roots.Last().Value + 2 : poly.ExtremeValues.Last().X + 2;
-            }
-            else if (poly.Roots != null && poly.Roots.Count > 0) {
-                left = poly.Roots[0].Value - 2;
-
-                right = poly.Roots.Last().Value + 2;
-            }
-            else if (poly.ExtremeValues != null && poly.ExtremeValues.Count > 0)
-            {
-                left = poly.ExtremeValues[0].X - 2;
-
-                right = poly.ExtremeValues.Last().X + 2;
+                var point = points[i];
+                observablePoints[i] = new ObservablePoint(point.X, point.Y);
             }
 
-            var edgeValue = Math.Abs(left) > Math.Abs(right) ? Math.Abs(left) : Math.Abs(right);
+            var colors = new SKColor[]
+            {
+                SKColors.AliceBlue,
+                SKColors.AntiqueWhite,
+                SKColors.Aqua,
+                SKColors.Aquamarine,
+                SKColors.Azure,
+                SKColors.Beige,
+                SKColors.Bisque,
+                SKColors.BlanchedAlmond,
+                SKColors.Blue,
+                SKColors.BlueViolet,
+                SKColors.Brown,
+                SKColors.BurlyWood,
+                SKColors.CadetBlue,
+                SKColors.Chartreuse,
+                SKColors.Chocolate,
+                SKColors.Coral,
+                SKColors.CornflowerBlue,
+                SKColors.Cornsilk,
+                SKColors.Crimson,
+                SKColors.Cyan,
+/*                SKColors.DarkBlue,
+                SKColors.DarkCyan,
+                SKColors.DarkGoldenrod,
+                SKColors.DarkGray,
+                SKColors.DarkGreen,
+                SKColors.DarkKhaki,
+                SKColors.DarkMagenta,
+                SKColors.DarkOliveGreen,
+                SKColors.DarkOrange,
+                SKColors.DarkOrchid,
+                SKColors.DarkRed,
+                SKColors.DarkSalmon,
+                SKColors.DarkSeaGreen,
+                SKColors.DarkSlateBlue,
+                SKColors.DarkSlateGray,
+                SKColors.DarkTurquoise,
+                SKColors.DarkViolet,*/
+                SKColors.DeepPink,
+                SKColors.DeepSkyBlue,
+                SKColors.DimGray,
+                SKColors.DodgerBlue,
+                SKColors.Firebrick,
+                SKColors.FloralWhite,
+                SKColors.ForestGreen,
+                SKColors.Fuchsia,
+                SKColors.Gainsboro,
+                SKColors.GhostWhite,
+                SKColors.Gold,
+                SKColors.Goldenrod,
+                SKColors.Gray,
+                SKColors.Green,
+                SKColors.GreenYellow,
+                SKColors.Honeydew,
+                SKColors.HotPink,
+                SKColors.IndianRed,
+                SKColors.Indigo,
+                SKColors.Ivory,
+                SKColors.Khaki,
+                SKColors.Lavender,
+                SKColors.LavenderBlush,
+                SKColors.LawnGreen,
+                SKColors.LemonChiffon,
+                SKColors.LightBlue,
+                SKColors.LightCoral,
+                SKColors.LightCyan,
+                SKColors.LightGoldenrodYellow,
+                SKColors.LightGray,
+                SKColors.LightGreen,
+                SKColors.LightPink,
+                SKColors.LightSalmon,
+                SKColors.LightSeaGreen,
+                SKColors.LightSkyBlue,
+                SKColors.LightSlateGray,
+                SKColors.LightSteelBlue,
+                SKColors.LightYellow,
+                SKColors.Lime,
+                SKColors.LimeGreen,
+                SKColors.Linen,
+                SKColors.Magenta,
+                SKColors.Maroon,
+                SKColors.MediumAquamarine,
+                SKColors.MediumBlue,
+                SKColors.MediumOrchid,
+                SKColors.MediumPurple,
+                SKColors.MediumSeaGreen,
+                SKColors.MediumSlateBlue,
+                SKColors.MediumSpringGreen,
+                SKColors.MediumTurquoise,
+                SKColors.MediumVioletRed,
+                SKColors.MidnightBlue,
+                SKColors.MintCream,
+                SKColors.MistyRose,
+                SKColors.Moccasin,
+                SKColors.NavajoWhite,
+                SKColors.Navy,
+                SKColors.OldLace,
+                SKColors.Olive,
+                SKColors.OliveDrab,
+                SKColors.Orange,
+                SKColors.OrangeRed,
+                SKColors.Orchid,
+                SKColors.PaleGoldenrod,
+                SKColors.PaleGreen,
+                SKColors.PaleTurquoise,
+                SKColors.PaleVioletRed,
+                SKColors.PapayaWhip,
+                SKColors.PeachPuff,
+                SKColors.Peru,
+                SKColors.Pink,
+                SKColors.Plum,
+                SKColors.PowderBlue,
+                SKColors.Purple,
+                SKColors.Red,
+                SKColors.RosyBrown,
+                SKColors.RoyalBlue,
+                SKColors.SaddleBrown,
+                SKColors.Salmon,
+                SKColors.SandyBrown,
+                SKColors.SeaGreen,
+                SKColors.SeaShell,
+                SKColors.Sienna,
+                SKColors.Silver,
+                SKColors.SkyBlue,
+                SKColors.SlateBlue,
+                SKColors.SlateGray,
+                SKColors.Snow,
+                SKColors.SpringGreen,
+                SKColors.SteelBlue,
+                SKColors.Tan,
+                SKColors.Teal,
+                SKColors.Thistle,
+                SKColors.Tomato,
+                SKColors.Turquoise,
+                SKColors.Violet,
+                SKColors.Wheat,
+                SKColors.White,
+                SKColors.WhiteSmoke,
+                SKColors.Yellow,
+                SKColors.YellowGreen,
+            };
 
-            edgeValue = Math.Ceiling(edgeValue);
+            var rnd = new Random();
 
-            List<ObservablePoint> points = new List<ObservablePoint>();
+            var color = colors[rnd.Next(0, colors.Length)];
 
-            points.Add(new ObservablePoint(-edgeValue, poly.y(-edgeValue)));
+            var colorHex = new StringBuilder(color.ToString());
 
-            if (poly.Roots != null)
-                foreach (var root in poly.Roots)
-                {
-                    points.Add(new ObservablePoint(root.Value, 0));
-                }
+            colorHex[1] = '2';
+            colorHex[2] = '0';
 
-            if (poly.ExtremeValues != null)
-                foreach (var extremeValue in poly.ExtremeValues)
-                {
-                    points.Add(new ObservablePoint(extremeValue.X, extremeValue.Y));
-                }
+            var colorSemiTransparent = SKColor.Parse(colorHex.ToString());
 
-            points.Add(new ObservablePoint(edgeValue, poly.y(edgeValue)));
+            var aplha = colorSemiTransparent.Alpha;
 
-            var lineSeries = new LineSeries<ObservablePoint>()
+            var scatterSeries = new ScatterSeries<ObservablePoint>()
             {
 
-                Values = points.Distinct().OrderBy(p => p.X).ToArray(),
+                Stroke = new SolidColorPaint(color) { StrokeThickness = 4 },
 
-                LineSmoothness = 0.75,
+                Fill = new SolidColorPaint(colorSemiTransparent),
+
+                GeometrySize = 15,
+
+                Values = observablePoints,
 
 
                 YToolTipLabelFormatter = (charPoint) =>
@@ -130,7 +257,48 @@ namespace PolynomialAppUI
                 }
             };
 
-            return lineSeries;
+            List<ObservablePoint> observablePoints2 = new List<ObservablePoint>();
+
+            var distance = Math.Abs(points[0].X - points[points.Length - 1].X);
+
+            double shift = 0.005;
+
+            while (distance / shift > 500)
+            {
+                shift *= 2; 
+            }
+
+            for (double i = points[0].X; i <= points[points.Length - 1].X; i += shift) 
+            {
+                i = Math.Round(i * 100) / 100;
+                observablePoints2.Add(new ObservablePoint(i, poly.y(i)));
+            }
+
+            var lineSeries = new LineSeries<ObservablePoint>()
+            {
+                Stroke = new SolidColorPaint(color) { StrokeThickness = 4 },
+
+                Fill = new SolidColorPaint(colorSemiTransparent),
+
+                Values = observablePoints2,
+
+                GeometryStroke = new SolidColorPaint(SKColors.Transparent),
+                GeometryFill = new SolidColorPaint(SKColors.Transparent),
+
+                YToolTipLabelFormatter = (charPoint) =>
+                {
+                    return $"{charPoint.Coordinate.SecondaryValue.ToString("0.#####")}; {charPoint.Coordinate.PrimaryValue.ToString("0.#####")}";
+                },
+
+            };
+
+            var series = new ISeries[]
+            {
+                lineSeries,
+                scatterSeries,
+            };
+
+            return series;
         }
 
         private void FormulaInput2_DataContextTextChanged(object sender, TextChangedEventArgs e)
