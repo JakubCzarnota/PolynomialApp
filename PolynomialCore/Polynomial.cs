@@ -8,9 +8,14 @@ using System.Threading.Tasks;
 
 namespace PolynomialCore
 {
+    /// <summary>
+    /// Class representing a polynomial
+    /// </summary>
     public class Polynomial
     {
-
+        /// <summary>
+        /// Degree of this polynomial
+        /// </summary>
         public int Degree
         {
             get
@@ -19,20 +24,46 @@ namespace PolynomialCore
             }
         }
 
+        /// <summary>
+        /// Coefficients of this polynomial
+        /// </summary>
         public double[] Coefficients { get; private set; }
 
+        /// <summary>
+        /// ValuesSet of this polynoamil
+        /// </summary>
         public Interval? ValuesSet { get; private set; }
 
+
+        /// <summary>
+        /// Roots Of this polynomial
+        /// </summary>
         public List<Root>? Roots {  get; private set; }
 
+        /// <summary>
+        /// Extreme values of this polynimial
+        /// </summary>
         public List<Point>? ExtremeValues { get; private set; }
 
+        /// <summary>
+        /// Monotinicity of this polynomial (intervals in which this polynomial is increasing and decreasing)
+        /// </summary>
         public (List<Interval> increasing, List<Interval> decreasing)? Monotinicity { get; private set; }
 
+        /// <summary>
+        /// Intervals in which this polynomial has only positive values
+        /// </summary>
         public List<Interval>? PositiveValues { get; private set; }
 
+        /// <summary>
+        /// Intervals in which this polynomial has only negative values
+        /// </summary>
         public List<Interval>? NegativeValues { get; private set; }
 
+        /// <summary>
+        /// Create polynomial from formula
+        /// </summary>
+        /// <param name="polynomial">Polynomial formula as string</param>
         public Polynomial(string polynomial) {
 
             polynomial = polynomial.Replace(" ", "");
@@ -42,11 +73,19 @@ namespace PolynomialCore
 
         }
 
+        /// <summary>
+        /// Creates polynomial with all coefficients set to 0
+        /// </summary>
+        /// <param name="degree">Degree of polynomial</param>
         public Polynomial(int degree)
         {
             Coefficients = new double[degree+1];
         }
 
+        /// <summary>
+        /// Creates polynomial from coefficients array
+        /// </summary>
+        /// <param name="coefficients">Array of coefficients</param>
         public Polynomial(double[] coefficients)
         {
             Coefficients = coefficients;
@@ -749,6 +788,11 @@ namespace PolynomialCore
             return points.DistinctBy(p => p.X).OrderBy(p => p.X).ToArray();
         }
 
+        /// <summary>
+        /// Changes sign of polynomial
+        /// </summary>
+        /// <param name="a">Polynomial</param>
+        /// <returns>New polynomial with changed sign</returns>
         public static Polynomial operator -(Polynomial a)
         {
             Polynomial newPoly =  new Polynomial(a.Coefficients);
@@ -761,6 +805,12 @@ namespace PolynomialCore
             return newPoly;
         }
 
+        /// <summary>
+        /// Adds two polynomials
+        /// </summary>
+        /// <param name="a">First polynomial</param>
+        /// <param name="b">Second polynomial</param>
+        /// <returns>New polynomial resulting from adding those two polynomials</returns>
         public static Polynomial operator +(Polynomial a, Polynomial b)
         {
             int degree = a.Degree > b.Degree ? a.Degree : b.Degree;
@@ -780,6 +830,12 @@ namespace PolynomialCore
             return newPoly;
         }
 
+        /// <summary>
+        /// Subtract two polynomials
+        /// </summary>
+        /// <param name="a">First polynomial</param>
+        /// <param name="b">Second polynomial</param>
+        /// <returns>New polynomial resulting from subtracting those two polynomials</returns>
         public static Polynomial operator -(Polynomial a, Polynomial b)
         {
             int degree = a.Degree > b.Degree ? a.Degree : b.Degree;
@@ -817,6 +873,12 @@ namespace PolynomialCore
             return newPoly;
         }
 
+        /// <summary>
+        /// Multiply two polynomials
+        /// </summary>
+        /// <param name="a">First polynomial</param>
+        /// <param name="b">Second polynomial</param>
+        /// <returns>New polynomial resulting from multiplying those two polynomials</returns>
         public static Polynomial operator *(Polynomial a, Polynomial b)
         {
             int deegre = a.Degree + b.Degree;
@@ -834,6 +896,12 @@ namespace PolynomialCore
             return newPoly;
         }
 
+        /// <summary>
+        /// Devide two polynomials
+        /// </summary>
+        /// <param name="a">First polynomial</param>
+        /// <param name="b">Second polynomial</param>
+        /// <returns>New polynomial resulting from devideing those two polynomials</returns>
         public static Polynomial operator / (Polynomial a, Polynomial b)
         {
             Polynomial rest;
@@ -841,6 +909,12 @@ namespace PolynomialCore
             return devide(a, b, out rest);
         }
 
+        /// <summary>
+        /// Modulo divide two polynomials
+        /// </summary>
+        /// <param name="a">First polynomial</param>
+        /// <param name="b">Second polynomial</param>
+        /// <returns>New polynomial resulting from modulo devideing those two polynomials</returns>
         public static Polynomial operator %(Polynomial a, Polynomial b)
         {
             Polynomial rest;
@@ -891,6 +965,10 @@ namespace PolynomialCore
             return newPoly;
         }
 
+        /// <summary>
+        /// Gets polynomial formula
+        /// </summary>
+        /// <returns>Polynomial formula sa string</returns>
         public override string ToString()
         {
             string st = "";
