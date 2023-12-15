@@ -8,6 +8,8 @@ namespace PolynomialCore.Test
 {
     public class PolynomialTest
     {
+        const int DECIMAL_PRECISION = 5;
+
         [InlineData("3x+1", new double[] {1, 3}, 1)]
         [InlineData("5x^2+2x-10", new double[] { -10, 2, 5 }, 2)]
         [InlineData("13x^3-20x+0", new double[] {0, -20, 0, 13}, 3)]
@@ -28,7 +30,26 @@ namespace PolynomialCore.Test
 
         }
 
-        const int DECIMAL_PRECISION = 5;
+        [InlineData("3x+1", 2, 7)]
+        [InlineData("5x^2+2x-10", 1.5, 4.25)]
+        [InlineData("13x^3-20x+0", 0.5, -8.375)]
+        [Theory]
+        public void Y_ForGivenPolynomialFormlua_ReturnsCorrectValue(string polynomialFormula, double x, double y)
+        {
+            // arrange 
+
+            var poly = new Polynomial(polynomialFormula);
+
+            var number = Math.Pow(10, DECIMAL_PRECISION);
+
+            // act
+
+            var result = Math.Round(poly.Y(x) * number) / number;
+
+            // assert
+
+            result.Should().Be(Math.Round(y * number) / number);
+        }
 
         [InlineData("2x+10", new double[] {-5}, new int[] {1})]
         [InlineData("x^2-2x+1", new double[] { 1 }, new int[] { 2 })]
