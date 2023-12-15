@@ -8,10 +8,10 @@
   - [#ctor(a,isAClosed,b,isBClosed)](#M-PolynomialCore-Interval-#ctor-System-Nullable{System-Double},System-Boolean,System-Nullable{System-Double},System-Boolean- 'PolynomialCore.Interval.#ctor(System.Nullable{System.Double},System.Boolean,System.Nullable{System.Double},System.Boolean)')
   - [A](#P-PolynomialCore-Interval-A 'PolynomialCore.Interval.A')
   - [B](#P-PolynomialCore-Interval-B 'PolynomialCore.Interval.B')
-  - [isAClosed](#P-PolynomialCore-Interval-isAClosed 'PolynomialCore.Interval.isAClosed')
-  - [isBClosed](#P-PolynomialCore-Interval-isBClosed 'PolynomialCore.Interval.isBClosed')
+  - [IsAClosed](#P-PolynomialCore-Interval-IsAClosed 'PolynomialCore.Interval.IsAClosed')
+  - [IsBClosed](#P-PolynomialCore-Interval-IsBClosed 'PolynomialCore.Interval.IsBClosed')
+  - [Contains(x)](#M-PolynomialCore-Interval-Contains-System-Double- 'PolynomialCore.Interval.Contains(System.Double)')
   - [ToString()](#M-PolynomialCore-Interval-ToString 'PolynomialCore.Interval.ToString')
-  - [contains(x)](#M-PolynomialCore-Interval-contains-System-Double- 'PolynomialCore.Interval.contains(System.Double)')
 - [Point](#T-PolynomialCore-Point 'PolynomialCore.Point')
   - [#ctor(x,y)](#M-PolynomialCore-Point-#ctor-System-Double,System-Double- 'PolynomialCore.Point.#ctor(System.Double,System.Double)')
   - [X](#P-PolynomialCore-Point-X 'PolynomialCore.Point.X')
@@ -28,31 +28,31 @@
   - [PositiveValues](#P-PolynomialCore-Polynomial-PositiveValues 'PolynomialCore.Polynomial.PositiveValues')
   - [Roots](#P-PolynomialCore-Polynomial-Roots 'PolynomialCore.Polynomial.Roots')
   - [ValuesSet](#P-PolynomialCore-Polynomial-ValuesSet 'PolynomialCore.Polynomial.ValuesSet')
+  - [AddRoot(value,multiplicity)](#M-PolynomialCore-Polynomial-AddRoot-System-Double,System-Int32- 'PolynomialCore.Polynomial.AddRoot(System.Double,System.Int32)')
+  - [Devide(a,b,rest)](#M-PolynomialCore-Polynomial-Devide-PolynomialCore-Polynomial,PolynomialCore-Polynomial,PolynomialCore-Polynomial@- 'PolynomialCore.Polynomial.Devide(PolynomialCore.Polynomial,PolynomialCore.Polynomial,PolynomialCore.Polynomial@)')
+  - [FindCoefficients(polynomial)](#M-PolynomialCore-Polynomial-FindCoefficients-System-String- 'PolynomialCore.Polynomial.FindCoefficients(System.String)')
+  - [FindDegree(polynomial)](#M-PolynomialCore-Polynomial-FindDegree-System-String- 'PolynomialCore.Polynomial.FindDegree(System.String)')
+  - [FindExtremeValues()](#M-PolynomialCore-Polynomial-FindExtremeValues 'PolynomialCore.Polynomial.FindExtremeValues')
+  - [FindIntervalsWithRoots(interval,sturmSequence)](#M-PolynomialCore-Polynomial-FindIntervalsWithRoots-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}- 'PolynomialCore.Polynomial.FindIntervalsWithRoots(PolynomialCore.Interval,System.Collections.Generic.List{PolynomialCore.Polynomial})')
+  - [FindMonotinicity()](#M-PolynomialCore-Polynomial-FindMonotinicity 'PolynomialCore.Polynomial.FindMonotinicity')
+  - [FindPositiveAndNegativeValuse()](#M-PolynomialCore-Polynomial-FindPositiveAndNegativeValuse 'PolynomialCore.Polynomial.FindPositiveAndNegativeValuse')
+  - [FindRoots()](#M-PolynomialCore-Polynomial-FindRoots 'PolynomialCore.Polynomial.FindRoots')
+  - [FindValuesSet()](#M-PolynomialCore-Polynomial-FindValuesSet 'PolynomialCore.Polynomial.FindValuesSet')
+  - [GetDerivative()](#M-PolynomialCore-Polynomial-GetDerivative 'PolynomialCore.Polynomial.GetDerivative')
+  - [GetDivisors(x)](#M-PolynomialCore-Polynomial-GetDivisors-System-Int32- 'PolynomialCore.Polynomial.GetDivisors(System.Int32)')
+  - [GetPointsForGraph()](#M-PolynomialCore-Polynomial-GetPointsForGraph 'PolynomialCore.Polynomial.GetPointsForGraph')
+  - [GetRootsCountInInterval(interval,sturmSequence)](#M-PolynomialCore-Polynomial-GetRootsCountInInterval-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}- 'PolynomialCore.Polynomial.GetRootsCountInInterval(PolynomialCore.Interval,System.Collections.Generic.List{PolynomialCore.Polynomial})')
+  - [GetSturmSequence()](#M-PolynomialCore-Polynomial-GetSturmSequence 'PolynomialCore.Polynomial.GetSturmSequence')
+  - [NewtonRaphson(x0,derivative)](#M-PolynomialCore-Polynomial-NewtonRaphson-System-Double,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.NewtonRaphson(System.Double,PolynomialCore.Polynomial)')
+  - [ParseCoefficient(coefficient)](#M-PolynomialCore-Polynomial-ParseCoefficient-System-String- 'PolynomialCore.Polynomial.ParseCoefficient(System.String)')
   - [ToString()](#M-PolynomialCore-Polynomial-ToString 'PolynomialCore.Polynomial.ToString')
-  - [addRoot(value,multiplicity)](#M-PolynomialCore-Polynomial-addRoot-System-Double,System-Int32- 'PolynomialCore.Polynomial.addRoot(System.Double,System.Int32)')
-  - [devide(a,b,rest)](#M-PolynomialCore-Polynomial-devide-PolynomialCore-Polynomial,PolynomialCore-Polynomial,PolynomialCore-Polynomial@- 'PolynomialCore.Polynomial.devide(PolynomialCore.Polynomial,PolynomialCore.Polynomial,PolynomialCore.Polynomial@)')
-  - [findCoefficients(polynomial)](#M-PolynomialCore-Polynomial-findCoefficients-System-String- 'PolynomialCore.Polynomial.findCoefficients(System.String)')
-  - [findDegree(polynomial)](#M-PolynomialCore-Polynomial-findDegree-System-String- 'PolynomialCore.Polynomial.findDegree(System.String)')
-  - [findExtremeValues()](#M-PolynomialCore-Polynomial-findExtremeValues 'PolynomialCore.Polynomial.findExtremeValues')
-  - [findIntervalsWithRoots(interval,sturmSequence)](#M-PolynomialCore-Polynomial-findIntervalsWithRoots-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}- 'PolynomialCore.Polynomial.findIntervalsWithRoots(PolynomialCore.Interval,System.Collections.Generic.List{PolynomialCore.Polynomial})')
-  - [findMonotinicity()](#M-PolynomialCore-Polynomial-findMonotinicity 'PolynomialCore.Polynomial.findMonotinicity')
-  - [findPositiveAndNegativeValuse()](#M-PolynomialCore-Polynomial-findPositiveAndNegativeValuse 'PolynomialCore.Polynomial.findPositiveAndNegativeValuse')
-  - [findRoots()](#M-PolynomialCore-Polynomial-findRoots 'PolynomialCore.Polynomial.findRoots')
-  - [findValuesSet()](#M-PolynomialCore-Polynomial-findValuesSet 'PolynomialCore.Polynomial.findValuesSet')
-  - [getDerivative()](#M-PolynomialCore-Polynomial-getDerivative 'PolynomialCore.Polynomial.getDerivative')
-  - [getDivisors(x)](#M-PolynomialCore-Polynomial-getDivisors-System-Int32- 'PolynomialCore.Polynomial.getDivisors(System.Int32)')
-  - [getPointsForGraph()](#M-PolynomialCore-Polynomial-getPointsForGraph 'PolynomialCore.Polynomial.getPointsForGraph')
-  - [getRootsCountInInterval(interval,sturmSequence)](#M-PolynomialCore-Polynomial-getRootsCountInInterval-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}- 'PolynomialCore.Polynomial.getRootsCountInInterval(PolynomialCore.Interval,System.Collections.Generic.List{PolynomialCore.Polynomial})')
-  - [getSturmSequence()](#M-PolynomialCore-Polynomial-getSturmSequence 'PolynomialCore.Polynomial.getSturmSequence')
-  - [newtonRaphson(x0,derivative)](#M-PolynomialCore-Polynomial-newtonRaphson-System-Double,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.newtonRaphson(System.Double,PolynomialCore.Polynomial)')
+  - [Y(x)](#M-PolynomialCore-Polynomial-Y-System-Double- 'PolynomialCore.Polynomial.Y(System.Double)')
   - [op_Addition(a,b)](#M-PolynomialCore-Polynomial-op_Addition-PolynomialCore-Polynomial,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.op_Addition(PolynomialCore.Polynomial,PolynomialCore.Polynomial)')
   - [op_Division(a,b)](#M-PolynomialCore-Polynomial-op_Division-PolynomialCore-Polynomial,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.op_Division(PolynomialCore.Polynomial,PolynomialCore.Polynomial)')
   - [op_Modulus(a,b)](#M-PolynomialCore-Polynomial-op_Modulus-PolynomialCore-Polynomial,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.op_Modulus(PolynomialCore.Polynomial,PolynomialCore.Polynomial)')
   - [op_Multiply(a,b)](#M-PolynomialCore-Polynomial-op_Multiply-PolynomialCore-Polynomial,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.op_Multiply(PolynomialCore.Polynomial,PolynomialCore.Polynomial)')
   - [op_Subtraction(a,b)](#M-PolynomialCore-Polynomial-op_Subtraction-PolynomialCore-Polynomial,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.op_Subtraction(PolynomialCore.Polynomial,PolynomialCore.Polynomial)')
   - [op_UnaryNegation(a)](#M-PolynomialCore-Polynomial-op_UnaryNegation-PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.op_UnaryNegation(PolynomialCore.Polynomial)')
-  - [parseCoefficient(coefficient)](#M-PolynomialCore-Polynomial-parseCoefficient-System-String- 'PolynomialCore.Polynomial.parseCoefficient(System.String)')
-  - [y(x)](#M-PolynomialCore-Polynomial-y-System-Double- 'PolynomialCore.Polynomial.y(System.Double)')
 - [Root](#T-PolynomialCore-Root 'PolynomialCore.Root')
   - [#ctor(value,multiplicity)](#M-PolynomialCore-Root-#ctor-System-Double,System-Int32- 'PolynomialCore.Root.#ctor(System.Double,System.Int32)')
   - [Multiplicity](#P-PolynomialCore-Root-Multiplicity 'PolynomialCore.Root.Multiplicity')
@@ -115,19 +115,36 @@ Left value of this interval
 
 Right value of this interval
 
-<a name='P-PolynomialCore-Interval-isAClosed'></a>
-### isAClosed `property`
+<a name='P-PolynomialCore-Interval-IsAClosed'></a>
+### IsAClosed `property`
 
 ##### Summary
 
 Is this interval closed on the left side
 
-<a name='P-PolynomialCore-Interval-isBClosed'></a>
-### isBClosed `property`
+<a name='P-PolynomialCore-Interval-IsBClosed'></a>
+### IsBClosed `property`
 
 ##### Summary
 
 Is this interval closed on the right side
+
+<a name='M-PolynomialCore-Interval-Contains-System-Double-'></a>
+### Contains(x) `method`
+
+##### Summary
+
+Gets if this interval contains x
+
+##### Returns
+
+True/false
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| x | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') | X value |
 
 <a name='M-PolynomialCore-Interval-ToString'></a>
 ### ToString() `method`
@@ -143,23 +160,6 @@ This interval as a string
 ##### Parameters
 
 This method has no parameters.
-
-<a name='M-PolynomialCore-Interval-contains-System-Double-'></a>
-### contains(x) `method`
-
-##### Summary
-
-Gets if this interval contains x
-
-##### Returns
-
-True/false
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| x | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') | X value |
 
 <a name='T-PolynomialCore-Point'></a>
 ## Point `type`
@@ -306,23 +306,8 @@ Roots Of this polynomial
 
 ValuesSet of this polynoamil
 
-<a name='M-PolynomialCore-Polynomial-ToString'></a>
-### ToString() `method`
-
-##### Summary
-
-Gets polynomial formula
-
-##### Returns
-
-Polynomial formula sa string
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-PolynomialCore-Polynomial-addRoot-System-Double,System-Int32-'></a>
-### addRoot(value,multiplicity) `method`
+<a name='M-PolynomialCore-Polynomial-AddRoot-System-Double,System-Int32-'></a>
+### AddRoot(value,multiplicity) `method`
 
 ##### Summary
 
@@ -335,8 +320,8 @@ Adds new root or changes the multiplicity of existing one
 | value | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') | Value of root |
 | multiplicity | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Multiplicity of root |
 
-<a name='M-PolynomialCore-Polynomial-devide-PolynomialCore-Polynomial,PolynomialCore-Polynomial,PolynomialCore-Polynomial@-'></a>
-### devide(a,b,rest) `method`
+<a name='M-PolynomialCore-Polynomial-Devide-PolynomialCore-Polynomial,PolynomialCore-Polynomial,PolynomialCore-Polynomial@-'></a>
+### Devide(a,b,rest) `method`
 
 ##### Summary
 
@@ -354,8 +339,8 @@ A polynomial resulting from division
 | b | [PolynomialCore.Polynomial](#T-PolynomialCore-Polynomial 'PolynomialCore.Polynomial') | Second polynomial |
 | rest | [PolynomialCore.Polynomial@](#T-PolynomialCore-Polynomial@ 'PolynomialCore.Polynomial@') | Rest from division |
 
-<a name='M-PolynomialCore-Polynomial-findCoefficients-System-String-'></a>
-### findCoefficients(polynomial) `method`
+<a name='M-PolynomialCore-Polynomial-FindCoefficients-System-String-'></a>
+### FindCoefficients(polynomial) `method`
 
 ##### Summary
 
@@ -371,8 +356,8 @@ Array of coefficients
 | ---- | ---- | ----------- |
 | polynomial | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | String of polynomial formula |
 
-<a name='M-PolynomialCore-Polynomial-findDegree-System-String-'></a>
-### findDegree(polynomial) `method`
+<a name='M-PolynomialCore-Polynomial-FindDegree-System-String-'></a>
+### FindDegree(polynomial) `method`
 
 ##### Summary
 
@@ -388,8 +373,8 @@ Degree
 | ---- | ---- | ----------- |
 | polynomial | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | String of polynomial formula |
 
-<a name='M-PolynomialCore-Polynomial-findExtremeValues'></a>
-### findExtremeValues() `method`
+<a name='M-PolynomialCore-Polynomial-FindExtremeValues'></a>
+### FindExtremeValues() `method`
 
 ##### Summary
 
@@ -399,8 +384,8 @@ Finds extreme values of this polynomial and assigns them to ExtremeValues proper
 
 This method has no parameters.
 
-<a name='M-PolynomialCore-Polynomial-findIntervalsWithRoots-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}-'></a>
-### findIntervalsWithRoots(interval,sturmSequence) `method`
+<a name='M-PolynomialCore-Polynomial-FindIntervalsWithRoots-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}-'></a>
+### FindIntervalsWithRoots(interval,sturmSequence) `method`
 
 ##### Summary
 
@@ -417,8 +402,8 @@ Intervals with one root
 | interval | [PolynomialCore.Interval](#T-PolynomialCore-Interval 'PolynomialCore.Interval') | Interval in which function should look for intervals with one root |
 | sturmSequence | [System.Collections.Generic.List{PolynomialCore.Polynomial}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{PolynomialCore.Polynomial}') | Sturm sequence for this polynomial |
 
-<a name='M-PolynomialCore-Polynomial-findMonotinicity'></a>
-### findMonotinicity() `method`
+<a name='M-PolynomialCore-Polynomial-FindMonotinicity'></a>
+### FindMonotinicity() `method`
 
 ##### Summary
 
@@ -428,8 +413,8 @@ Finds monotinicity of this polynomial's function
 
 This method has no parameters.
 
-<a name='M-PolynomialCore-Polynomial-findPositiveAndNegativeValuse'></a>
-### findPositiveAndNegativeValuse() `method`
+<a name='M-PolynomialCore-Polynomial-FindPositiveAndNegativeValuse'></a>
+### FindPositiveAndNegativeValuse() `method`
 
 ##### Summary
 
@@ -439,8 +424,8 @@ Finds for which x, y is positive and  for which x, y is negative
 
 This method has no parameters.
 
-<a name='M-PolynomialCore-Polynomial-findRoots'></a>
-### findRoots() `method`
+<a name='M-PolynomialCore-Polynomial-FindRoots'></a>
+### FindRoots() `method`
 
 ##### Summary
 
@@ -450,8 +435,8 @@ Finds roots of this polynomial and assigns them to Roots property
 
 This method has no parameters.
 
-<a name='M-PolynomialCore-Polynomial-findValuesSet'></a>
-### findValuesSet() `method`
+<a name='M-PolynomialCore-Polynomial-FindValuesSet'></a>
+### FindValuesSet() `method`
 
 ##### Summary
 
@@ -461,8 +446,8 @@ Finds this set of values of this polynomial
 
 This method has no parameters.
 
-<a name='M-PolynomialCore-Polynomial-getDerivative'></a>
-### getDerivative() `method`
+<a name='M-PolynomialCore-Polynomial-GetDerivative'></a>
+### GetDerivative() `method`
 
 ##### Summary
 
@@ -476,8 +461,8 @@ Derivative
 
 This method has no parameters.
 
-<a name='M-PolynomialCore-Polynomial-getDivisors-System-Int32-'></a>
-### getDivisors(x) `method`
+<a name='M-PolynomialCore-Polynomial-GetDivisors-System-Int32-'></a>
+### GetDivisors(x) `method`
 
 ##### Summary
 
@@ -493,8 +478,8 @@ List of x divisors
 | ---- | ---- | ----------- |
 | x | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Number to divide |
 
-<a name='M-PolynomialCore-Polynomial-getPointsForGraph'></a>
-### getPointsForGraph() `method`
+<a name='M-PolynomialCore-Polynomial-GetPointsForGraph'></a>
+### GetPointsForGraph() `method`
 
 ##### Summary
 
@@ -508,8 +493,8 @@ Array of points
 
 This method has no parameters.
 
-<a name='M-PolynomialCore-Polynomial-getRootsCountInInterval-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}-'></a>
-### getRootsCountInInterval(interval,sturmSequence) `method`
+<a name='M-PolynomialCore-Polynomial-GetRootsCountInInterval-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}-'></a>
+### GetRootsCountInInterval(interval,sturmSequence) `method`
 
 ##### Summary
 
@@ -526,8 +511,8 @@ Count of roots in interval
 | interval | [PolynomialCore.Interval](#T-PolynomialCore-Interval 'PolynomialCore.Interval') | Interval to chcek |
 | sturmSequence | [System.Collections.Generic.List{PolynomialCore.Polynomial}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{PolynomialCore.Polynomial}') | Sturm sequence for this polynomial |
 
-<a name='M-PolynomialCore-Polynomial-getSturmSequence'></a>
-### getSturmSequence() `method`
+<a name='M-PolynomialCore-Polynomial-GetSturmSequence'></a>
+### GetSturmSequence() `method`
 
 ##### Summary
 
@@ -541,8 +526,8 @@ Sturm sequence
 
 This method has no parameters.
 
-<a name='M-PolynomialCore-Polynomial-newtonRaphson-System-Double,PolynomialCore-Polynomial-'></a>
-### newtonRaphson(x0,derivative) `method`
+<a name='M-PolynomialCore-Polynomial-NewtonRaphson-System-Double,PolynomialCore-Polynomial-'></a>
+### NewtonRaphson(x0,derivative) `method`
 
 ##### Summary
 
@@ -558,6 +543,55 @@ Approximate root
 | ---- | ---- | ----------- |
 | x0 | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') | Approximate root |
 | derivative | [PolynomialCore.Polynomial](#T-PolynomialCore-Polynomial 'PolynomialCore.Polynomial') | Derivative of this polynomial |
+
+<a name='M-PolynomialCore-Polynomial-ParseCoefficient-System-String-'></a>
+### ParseCoefficient(coefficient) `method`
+
+##### Summary
+
+Parses string coefficient to double coefficient
+
+##### Returns
+
+Coefficient as double
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| coefficient | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Coefficient as string |
+
+<a name='M-PolynomialCore-Polynomial-ToString'></a>
+### ToString() `method`
+
+##### Summary
+
+Gets polynomial formula
+
+##### Returns
+
+Polynomial formula sa string
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-PolynomialCore-Polynomial-Y-System-Double-'></a>
+### Y(x) `method`
+
+##### Summary
+
+Gets value of W(x) for this polynomial
+
+##### Returns
+
+Value of y
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| x | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') | x |
 
 <a name='M-PolynomialCore-Polynomial-op_Addition-PolynomialCore-Polynomial,PolynomialCore-Polynomial-'></a>
 ### op_Addition(a,b) `method`
@@ -665,40 +699,6 @@ New polynomial with changed sign
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | a | [PolynomialCore.Polynomial](#T-PolynomialCore-Polynomial 'PolynomialCore.Polynomial') | Polynomial |
-
-<a name='M-PolynomialCore-Polynomial-parseCoefficient-System-String-'></a>
-### parseCoefficient(coefficient) `method`
-
-##### Summary
-
-Parses string coefficient to double coefficient
-
-##### Returns
-
-Coefficient as double
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| coefficient | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Coefficient as string |
-
-<a name='M-PolynomialCore-Polynomial-y-System-Double-'></a>
-### y(x) `method`
-
-##### Summary
-
-Gets value of W(x) for this polynomial
-
-##### Returns
-
-Value of y
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| x | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') | x |
 
 <a name='T-PolynomialCore-Root'></a>
 ## Root `type`
