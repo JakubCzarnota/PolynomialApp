@@ -700,6 +700,9 @@ namespace PolynomialCore
             if (PositiveValues == null || NegativeValues == null)
                 FindPositiveAndNegativeValues();
 
+            if (Monotinicity == null)
+                FindMonotinicity();
+
             double? a = null;
             double? b = null;
 

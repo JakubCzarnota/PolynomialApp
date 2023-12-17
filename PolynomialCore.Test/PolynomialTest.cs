@@ -354,5 +354,40 @@ namespace PolynomialCore.Test
             poly.PositiveValues.Should().BeEquivalentTo(positiveValues);
             poly.NegativeValues.Should().BeEquivalentTo(negativeValues);
         }
+
+        public static IEnumerable<object[]> GetSampleDataForFindValuesSetTests()
+        {
+            yield return new object[] { "2x+10", new Interval(null, null, true) };
+            yield return new object[] { "x^2-2x-1", new Interval(-2, null, true) };
+            yield return new object[] { "x^3-1", new Interval(null, null, true) };
+            yield return new object[] { "x^3+4x^2-3x-18", new Interval(null, null, true) };
+        }
+
+        [MemberData(nameof(GetSampleDataForFindValuesSetTests))]
+        [Theory]
+        public void FindValuesSet_ForGivenPolynomialFormlua_FindsCorrectValuesSet(string polynomialFormula, Interval valuesSet)
+        {
+            // arrange 
+
+            var poly = new Polynomial(polynomialFormula);
+
+            valuesSet.A = valuesSet.A == null ? null : Round((double)valuesSet.A);
+            valuesSet.B = valuesSet.B == null ? null : Round((double)valuesSet.B);
+
+            // act
+
+            poly.FindValuesSet();
+
+            poly.ValuesSet.Should().NotBeNull();
+
+            poly.ValuesSet!.A = poly.ValuesSet!.A == null ? null : Round((double)poly.ValuesSet!.A);
+            poly.ValuesSet!.B = poly.ValuesSet!.B == null ? null : Round((double)poly.ValuesSet!.B);
+
+            // assert
+
+            poly.ValuesSet.Should().BeEquivalentTo(valuesSet);
+
+        }
+
     }
 }
