@@ -33,7 +33,7 @@ namespace PolynomialCore.Test
         [InlineData("5x^2+2x-10", new double[] { -10, 2, 5 }, 2)]
         [InlineData("13x^3-20x+0", new double[] { 0, -20, 0, 13 }, 3)]
         [Theory]
-        public void Constructor_ForGivenPolynomialFormlua_ReturnsCorrectPolynomial(string polynomialFormula, double[] coefficients, int degree)
+        public void Constructor_ForGivenPolynomialFormula_ReturnsCorrectPolynomial(string polynomialFormula, double[] coefficients, int degree)
         {
 
             // arrange
@@ -53,7 +53,7 @@ namespace PolynomialCore.Test
         [InlineData("5x^2+2x-10", 1.5, 4.25)]
         [InlineData("13x^3-20x+0", 0.5, -8.375)]
         [Theory]
-        public void Y_ForGivenPolynomialFormlua_ReturnsCorrectValue(string polynomialFormula, double x, double y)
+        public void Y_ForGivenPolynomialFormula_ReturnsCorrectValue(string polynomialFormula, double x, double y)
         {
             // arrange 
 
@@ -104,7 +104,7 @@ namespace PolynomialCore.Test
 
         [MemberData(nameof(GetSampleDataForFindRootsTests))]
         [Theory]
-        public void FindRoots_ForGivenPolynomialFormlua_ReturnsCorrectRoots(string polynomialFormula, List<Root> roots)
+        public void FindRoots_ForGivenPolynomialFormula_ReturnsCorrectRoots(string polynomialFormula, List<Root> roots)
         {
             // arrange 
 
@@ -158,7 +158,7 @@ namespace PolynomialCore.Test
 
         [MemberData(nameof(GetSampleDataForFindExtremeValuesTests))]
         [Theory]
-        public void FindExtremeValues_ForGivenPolynomialFormlua_FindsExtremeValues(string polynomialFormula, List<Point> extremeValues)
+        public void FindExtremeValues_ForGivenPolynomialFormula_FindsExtremeValues(string polynomialFormula, List<Point> extremeValues)
         {
             // arrange
 
@@ -231,7 +231,7 @@ namespace PolynomialCore.Test
 
         [MemberData(nameof(GetSampleDataForFindMonotinicityTests))]
         [Theory]
-        public void FindMonotinicity_ForGivenPolynomialFormlua_FindsCorrectMonotinicity(string polynomialFormula, (List<Interval> increasing, List<Interval> decreasing) monotinicity)
+        public void FindMonotinicity_ForGivenPolynomialFormula_FindsCorrectMonotinicity(string polynomialFormula, (List<Interval> increasing, List<Interval> decreasing) monotinicity)
         {
             // arrange
 
@@ -323,7 +323,7 @@ namespace PolynomialCore.Test
 
         [MemberData(nameof(GetSampleDataForFindPositiveAndNegativeValuesTests))]
         [Theory]
-        public void FindPositiveAndNegativeValues_ForGivenPolynomialFormlua_FindsCorrectPositiveAndNegativeValues(string polynomialFormula, List<Interval> positiveValues, List<Interval> negativeValues)
+        public void FindPositiveAndNegativeValues_ForGivenPolynomialFormula_FindsCorrectPositiveAndNegativeValues(string polynomialFormula, List<Interval> positiveValues, List<Interval> negativeValues)
         {
             // arrange
 
@@ -376,7 +376,7 @@ namespace PolynomialCore.Test
 
         [MemberData(nameof(GetSampleDataForFindValuesSetTests))]
         [Theory]
-        public void FindValuesSet_ForGivenPolynomialFormlua_FindsCorrectValuesSet(string polynomialFormula, Interval valuesSet)
+        public void FindValuesSet_ForGivenPolynomialFormula_FindsCorrectValuesSet(string polynomialFormula, Interval valuesSet)
         {
             // arrange 
 
@@ -445,7 +445,7 @@ namespace PolynomialCore.Test
 
         [MemberData(nameof(GetSampleDataForGetPointsForGraphTests))]
         [Theory]
-        public void GetPointsForGraph_ForGivenPolynomialFormlua_ReturnsCorrectPoints(string polynomialFormula, List<Point> points) 
+        public void GetPointsForGraph_ForGivenPolynomialFormula_ReturnsCorrectPoints(string polynomialFormula, List<Point> points) 
         {
 
             // arrange
