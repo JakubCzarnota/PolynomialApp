@@ -57,30 +57,41 @@ namespace PolynomialCore.Test
             result.Should().Be(Round(y));
         }
 
-        public static IEnumerable<object[]> GetSampleDataForFindRootsTest()
+        public static IEnumerable<object[]> GetSampleDataForFindRootsTests()
         {
-            yield return new object[] { "2x+10", new List<Root>() 
-            {
-                new Root(-5, 1)
-            }};
+            yield return new object[] { "2x+10", 
+                new List<Root>() 
+                {
+                    new Root(-5, 1)
+                }
+            };
+
             yield return new object[] { "x^2-2x+1", new List<Root>() 
-            {
-                new Root(1, 2)
-            }};
+                {
+                    new Root(1, 2)
+                }
+            };
+
             yield return new object[] { "x^2+1", new List<Root>() {}};
-            yield return new object[] { "x^3+4x^2-3x-18", new List<Root>() 
-            {
-                new Root(-3, 2),
-                new Root(2, 1)
-            }};
-            yield return new object[] { "x^4-x^3+2x-1", new List<Root>() 
-            {
-                new Root(-1.1537213755418, 1),
-                new Root(0.5356873867919, 1)
-            }};
+
+            yield return new object[] { "x^3+4x^2-3x-18", 
+                new List<Root>() 
+                {
+                    new Root(-3, 2),
+                    new Root(2, 1)
+                }
+            };
+
+            yield return new object[] { "x^4-x^3+2x-1", 
+                new List<Root>() 
+                {
+                    new Root(-1.1537213755418, 1),
+                    new Root(0.5356873867919, 1)
+                }
+            };
         }
 
-        [MemberData(nameof(GetSampleDataForFindRootsTest))]
+        [MemberData(nameof(GetSampleDataForFindRootsTests))]
         [Theory]
         public void FindRoots_ForGivenPolynomialFormlua_ReturnsCorrectRoots(string polynomialFormula, List<Root> roots)
         {
@@ -112,22 +123,29 @@ namespace PolynomialCore.Test
 
         }
 
-        public static IEnumerable<object[]> GetSampleDataForFindExtremeValuesTest()
+        public static IEnumerable<object[]> GetSampleDataForFindExtremeValuesTests()
         {
             yield return new object[] { "2x+10", new List<Point>() };
-            yield return new object[] { "x^2-2x-1", new List<Point>()
-            {
-                new Point(1, -2)
-            }};
+
+            yield return new object[] { "x^2-2x-1", 
+                new List<Point>()
+                {
+                    new Point(1, -2)
+                }
+            };
+
             yield return new object[] { "x^3-1", new List<Point>() };
-            yield return new object[] { "x^3+4x^2-3x-18", new List<Point>()
-            {
-                new Point(-3, 0),
-                new Point(0.3333333333333, -18.5185185185185)
-            }};
+
+            yield return new object[] { "x^3+4x^2-3x-18", 
+                new List<Point>()
+                {
+                    new Point(-3, 0),
+                    new Point(0.3333333333333, -18.5185185185185)
+                }
+            };
         }
 
-        [MemberData(nameof(GetSampleDataForFindExtremeValuesTest))]
+        [MemberData(nameof(GetSampleDataForFindExtremeValuesTests))]
         [Theory]
         public void FindExtremeValues_ForGivenPolynomialFormlua_FindsExtremeValues(string polynomialFormula, List<Point> extremeValues)
         {
@@ -158,43 +176,49 @@ namespace PolynomialCore.Test
             poly.ExtremeValues.Should().BeEquivalentTo(extremeValues);
         }
 
-        public static IEnumerable<object[]> GetSampleDataForFindMonotinicityTest()
+        public static IEnumerable<object[]> GetSampleDataForFindMonotinicityTests()
         {
-            yield return new object[] { "2x+10", (new List<Interval>()
-            {
-                new Interval(null, null, true)
-            },
-            new List<Interval>()
-            )};
+            yield return new object[] { "2x+10", 
+                (new List<Interval>()
+                {
+                    new Interval(null, null, true)
+                },
+                new List<Interval>())
+            };
 
-            yield return new object[] { "x^2-2x-1", (new List<Interval>()
-            {
-                new Interval(1, null, true)
-            },
-            new List<Interval>()
-            {
-                new Interval(null, 1, true)
-            })};
+            yield return new object[] { "x^2-2x-1", 
+                (new List<Interval>()
+                {
+                    new Interval(1, null, true)
+                },
+                new List<Interval>()
+                {
+                    new Interval(null, 1, true)
+                })
+            };
 
-            yield return new object[] { "x^3-1", (new List<Interval>()
-            {
-                new Interval(null, null, true)
-            },
-            new List<Interval>()
-            )};
+            yield return new object[] { "x^3-1", 
+                (new List<Interval>()
+                {
+                    new Interval(null, null, true)
+                },
+                new List<Interval>())
+            };
 
-            yield return new object[] { "x^3+4x^2-3x-18", (new List<Interval>()
-            {
-                new Interval(null, -3, true),
-                new Interval(0.3333333333333, null, true)
-            },
-            new List<Interval>()
-            {
-                new Interval(-3, 0.3333333333333, true)
-            })};
+            yield return new object[] { "x^3+4x^2-3x-18", 
+                (new List<Interval>()
+                {
+                    new Interval(null, -3, true),
+                    new Interval(0.3333333333333, null, true)
+                },
+                new List<Interval>()
+                {
+                    new Interval(-3, 0.3333333333333, true)
+                })
+            };
         }
 
-        [MemberData(nameof(GetSampleDataForFindMonotinicityTest))]
+        [MemberData(nameof(GetSampleDataForFindMonotinicityTests))]
         [Theory]
         public void FindMonotinicity_ForGivenPolynomialFormlua_FindsCorrectMonotinicity(string polynomialFormula, (List<Interval> increasing, List<Interval> decreasing) monotinicity)
         {
@@ -237,52 +261,56 @@ namespace PolynomialCore.Test
             poly.Monotinicity.Should().BeEquivalentTo(monotinicity);
         }
 
-        public static IEnumerable<object[]> GetSampleDataForFindPositiveAndNegativeValuesTest()
+        public static IEnumerable<object[]> GetSampleDataForFindPositiveAndNegativeValuesTests()
         {
             yield return new object[] { "2x+10",
-            new List<Interval>()
-            {
-                new Interval(-5, null)
-            },
-            new List<Interval>()
-            {
-                new Interval(null, -5)
-            }};
+                new List<Interval>()
+                {
+                    new Interval(-5, null)
+                },
+                new List<Interval>()
+                {
+                    new Interval(null, -5)
+                }
+            };
 
             yield return new object[] { "x^2-2x-1",
-            new List<Interval>()
-            {
-                new Interval(null, -0.4142135623731),
-                new Interval(2.4142135623731, null)
-            },
-            new List<Interval>()
-            {
-                new Interval(-0.4142135623731, 2.4142135623731)
-            }};
+                new List<Interval>()
+                {
+                    new Interval(null, -0.4142135623731),
+                    new Interval(2.4142135623731, null)
+                },
+                new List<Interval>()
+                {
+                    new Interval(-0.4142135623731, 2.4142135623731)
+                }
+            };
 
             yield return new object[] { "x^3-1",
-            new List<Interval>()
-            {
-                new Interval(1, null)
-            },
-            new List<Interval>()
-            {
-                new Interval(null, 1)
-            }};
+                new List<Interval>()
+                {
+                    new Interval(1, null)
+                },
+                new List<Interval>()
+                {
+                    new Interval(null, 1)
+                }
+            };
 
             yield return new object[] { "x^3+4x^2-3x-18",
             new List<Interval>()
-            {
-                new Interval(2, null)
-            },
-            new List<Interval>()
-            {
-                new Interval(null, -3),
-                new Interval(-3, 2)            
-            }};
+                {
+                    new Interval(2, null)
+                },
+                new List<Interval>()
+                {
+                    new Interval(null, -3),
+                    new Interval(-3, 2)            
+                }
+            };
         }
 
-        [MemberData(nameof(GetSampleDataForFindPositiveAndNegativeValuesTest))]
+        [MemberData(nameof(GetSampleDataForFindPositiveAndNegativeValuesTests))]
         [Theory]
         public void FindPositiveAndNegativeValues_ForGivenPolynomialFormlua_FindsCorrectPositiveAndNegativeValues(string polynomialFormula, List<Interval> positiveValues, List<Interval> negativeValues)
         {
