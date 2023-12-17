@@ -6,6 +6,7 @@
 - [Interval](#T-PolynomialCore-Interval 'PolynomialCore.Interval')
   - [#ctor(a,b,autoClose)](#M-PolynomialCore-Interval-#ctor-System-Nullable{System-Double},System-Nullable{System-Double},System-Boolean- 'PolynomialCore.Interval.#ctor(System.Nullable{System.Double},System.Nullable{System.Double},System.Boolean)')
   - [#ctor(a,isAClosed,b,isBClosed)](#M-PolynomialCore-Interval-#ctor-System-Nullable{System-Double},System-Boolean,System-Nullable{System-Double},System-Boolean- 'PolynomialCore.Interval.#ctor(System.Nullable{System.Double},System.Boolean,System.Nullable{System.Double},System.Boolean)')
+  - [Infinity](#F-PolynomialCore-Interval-Infinity 'PolynomialCore.Interval.Infinity')
   - [A](#P-PolynomialCore-Interval-A 'PolynomialCore.Interval.A')
   - [B](#P-PolynomialCore-Interval-B 'PolynomialCore.Interval.B')
   - [IsAClosed](#P-PolynomialCore-Interval-IsAClosed 'PolynomialCore.Interval.IsAClosed')
@@ -100,6 +101,13 @@ Generates new interval
 | isAClosed | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Is it closed on the left side |
 | b | [System.Nullable{System.Double}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.Double}') | Right value |
 | isBClosed | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Is it closed on the right side |
+
+<a name='F-PolynomialCore-Interval-Infinity'></a>
+### Infinity `constants`
+
+##### Summary
+
+Represents plus and minus infinity
 
 <a name='P-PolynomialCore-Interval-A'></a>
 ### A `property`
