@@ -237,5 +237,94 @@ namespace PolynomialCore.Test
             poly.Monotinicity.Should().BeEquivalentTo(monotinicity);
         }
 
+        public static IEnumerable<object[]> GetSampleDataForFindPositiveAndNegativeValuesTest()
+        {
+            yield return new object[] { "2x+10",
+            new List<Interval>()
+            {
+                new Interval(-5, null)
+            },
+            new List<Interval>()
+            {
+                new Interval(null, -5)
+            }};
+
+            yield return new object[] { "x^2-2x-1",
+            new List<Interval>()
+            {
+                new Interval(null, -0.4142135623731),
+                new Interval(2.4142135623731, null)
+            },
+            new List<Interval>()
+            {
+                new Interval(-0.4142135623731, 2.4142135623731)
+            }};
+
+            yield return new object[] { "x^3-1",
+            new List<Interval>()
+            {
+                new Interval(1, null)
+            },
+            new List<Interval>()
+            {
+                new Interval(null, 1)
+            }};
+
+            yield return new object[] { "x^3+4x^2-3x-18",
+            new List<Interval>()
+            {
+                new Interval(2, null)
+            },
+            new List<Interval>()
+            {
+                new Interval(null, -3),
+                new Interval(-3, 2)            
+            }};
+        }
+
+        [MemberData(nameof(GetSampleDataForFindPositiveAndNegativeValuesTest))]
+        [Theory]
+        public void FindPositiveAndNegativeValues_ForGivenPolynomialFormlua_FindsCorrectPositiveAndNegativeValues(string polynomialFormula, List<Interval> positiveValues, List<Interval> negativeValues)
+        {
+            // arrange
+
+            var poly = new Polynomial(polynomialFormula);
+
+            foreach (var interval in positiveValues)
+            {
+                interval.A = interval.A == null ? null : Round((double)interval.A);
+                interval.B = interval.B == null ? null : Round((double)interval.B);
+            }
+            
+            foreach (var interval in negativeValues)
+            {
+                interval.A = interval.A == null ? null : Round((double)interval.A);
+                interval.B = interval.B == null ? null : Round((double)interval.B);
+            }
+
+            // act
+
+            poly.FindPositiveAndNegativeValues();
+
+            poly.PositiveValues.Should().NotBeNull();
+            poly.NegativeValues.Should().NotBeNull();
+
+            foreach (var interval in poly.PositiveValues!)
+            {
+                interval.A = interval.A == null ? null : Round((double)interval.A);
+                interval.B = interval.B == null ? null : Round((double)interval.B);
+            }
+
+            foreach (var interval in poly.NegativeValues!)
+            {
+                interval.A = interval.A == null ? null : Round((double)interval.A);
+                interval.B = interval.B == null ? null : Round((double)interval.B);
+            }
+
+            // assert
+
+            poly.PositiveValues.Should().BeEquivalentTo(positiveValues);
+            poly.NegativeValues.Should().BeEquivalentTo(negativeValues);
+        }
     }
 }

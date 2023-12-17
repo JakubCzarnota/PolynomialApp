@@ -35,7 +35,7 @@
   - [FindExtremeValues()](#M-PolynomialCore-Polynomial-FindExtremeValues 'PolynomialCore.Polynomial.FindExtremeValues')
   - [FindIntervalsWithRoots(interval,sturmSequence)](#M-PolynomialCore-Polynomial-FindIntervalsWithRoots-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}- 'PolynomialCore.Polynomial.FindIntervalsWithRoots(PolynomialCore.Interval,System.Collections.Generic.List{PolynomialCore.Polynomial})')
   - [FindMonotinicity()](#M-PolynomialCore-Polynomial-FindMonotinicity 'PolynomialCore.Polynomial.FindMonotinicity')
-  - [FindPositiveAndNegativeValuse()](#M-PolynomialCore-Polynomial-FindPositiveAndNegativeValuse 'PolynomialCore.Polynomial.FindPositiveAndNegativeValuse')
+  - [FindPositiveAndNegativeValues()](#M-PolynomialCore-Polynomial-FindPositiveAndNegativeValues 'PolynomialCore.Polynomial.FindPositiveAndNegativeValues')
   - [FindRoots()](#M-PolynomialCore-Polynomial-FindRoots 'PolynomialCore.Polynomial.FindRoots')
   - [FindValuesSet()](#M-PolynomialCore-Polynomial-FindValuesSet 'PolynomialCore.Polynomial.FindValuesSet')
   - [GetDerivative()](#M-PolynomialCore-Polynomial-GetDerivative 'PolynomialCore.Polynomial.GetDerivative')
@@ -413,8 +413,8 @@ Finds monotinicity of this polynomial's function
 
 This method has no parameters.
 
-<a name='M-PolynomialCore-Polynomial-FindPositiveAndNegativeValuse'></a>
-### FindPositiveAndNegativeValuse() `method`
+<a name='M-PolynomialCore-Polynomial-FindPositiveAndNegativeValues'></a>
+### FindPositiveAndNegativeValues() `method`
 
 ##### Summary
 
