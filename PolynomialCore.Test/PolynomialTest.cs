@@ -11,11 +11,22 @@ namespace PolynomialCore.Test
     {
         const int DECIMAL_PRECISION = 5;
 
-        private static double Round(double x)
+        private static double? Round(double? x)
         {
+            if (x == null)
+                return null;
+
             var number = Math.Pow(10, DECIMAL_PRECISION);
 
-            return Math.Round(x * number) / number;
+            return Math.Round((double)(x * number)) / number;
+        }
+
+        private static double Round(double x)
+        {
+
+            var number = Math.Pow(10, DECIMAL_PRECISION);
+
+            return Math.Round((double)(x * number)) / number;
         }
 
         [InlineData("3x+1", new double[] { 1, 3 }, 1)]
@@ -228,14 +239,14 @@ namespace PolynomialCore.Test
 
             foreach (var increasing in monotinicity.increasing)
             {
-                increasing.A = increasing.A == Interval.Infinity ? Interval.Infinity : Round((double)increasing.A!);
-                increasing.B = increasing.B == Interval.Infinity ? Interval.Infinity : Round((double)increasing.B!);
+                increasing.A = Round(increasing.A);
+                increasing.B = Round(increasing.B);
             }
 
             foreach (var decreasing in monotinicity.decreasing)
             {
-                decreasing.A = decreasing.A == Interval.Infinity ? Interval.Infinity : Round((double)decreasing.A!);
-                decreasing.B = decreasing.B == Interval.Infinity ? Interval.Infinity : Round((double)decreasing.B!);
+                decreasing.A = Round(decreasing.A);
+                decreasing.B = Round(decreasing.B);
             }
 
             // act
@@ -246,14 +257,14 @@ namespace PolynomialCore.Test
 
             foreach (var increasing in poly.Monotinicity!.Value.increasing)
             {
-                increasing.A = increasing.A == Interval.Infinity ? Interval.Infinity : Round((double)increasing.A!);
-                increasing.B = increasing.B == Interval.Infinity ? Interval.Infinity : Round((double)increasing.B!);
+                increasing.A = Round(increasing.A);
+                increasing.B = Round(increasing.B);
             }
 
             foreach (var decreasing in poly.Monotinicity!.Value.decreasing)
             {
-                decreasing.A = decreasing.A == Interval.Infinity ? Interval.Infinity : Round((double)decreasing.A!);
-                decreasing.B = decreasing.B == Interval.Infinity ? Interval.Infinity : Round((double)decreasing.B!);
+                decreasing.A = Round(decreasing.A);
+                decreasing.B = Round(decreasing.B);
             }
 
             // assert
@@ -320,14 +331,14 @@ namespace PolynomialCore.Test
 
             foreach (var interval in positiveValues)
             {
-                interval.A = interval.A == Interval.Infinity ? Interval.Infinity : Round((double)interval.A!);
-                interval.B = interval.B == Interval.Infinity ? Interval.Infinity : Round((double)interval.B!);
+                interval.A = Round(interval.A);
+                interval.B = Round(interval.B);
             }
             
             foreach (var interval in negativeValues)
             {
-                interval.A = interval.A == Interval.Infinity ? Interval.Infinity : Round((double)interval.A!);
-                interval.B = interval.B == Interval.Infinity ? Interval.Infinity : Round((double)interval.B!);
+                interval.A = Round(interval.A);
+                interval.B = Round(interval.B);
             }
 
             // act
@@ -339,14 +350,14 @@ namespace PolynomialCore.Test
 
             foreach (var interval in poly.PositiveValues!)
             {
-                interval.A = interval.A == Interval.Infinity ? Interval.Infinity : Round((double)interval.A!);
-                interval.B = interval.B == Interval.Infinity ? Interval.Infinity : Round((double)interval.B!);
+                interval.A = Round(interval.A);
+                interval.B = Round(interval.B);
             }
 
             foreach (var interval in poly.NegativeValues!)
             {
-                interval.A = interval.A == Interval.Infinity ? Interval.Infinity : Round((double)interval.A!);
-                interval.B = interval.B == Interval.Infinity ? Interval.Infinity : Round((double)interval.B!);
+                interval.A = Round(interval.A);
+                interval.B = Round(interval.B);
             }
 
             // assert
@@ -371,8 +382,8 @@ namespace PolynomialCore.Test
 
             var poly = new Polynomial(polynomialFormula);
 
-            valuesSet.A = valuesSet.A == Interval.Infinity ? Interval.Infinity : Round((double)valuesSet.A!);
-            valuesSet.B = valuesSet.B == Interval.Infinity ? Interval.Infinity : Round((double)valuesSet.B!);
+            valuesSet.A = Round(valuesSet.A);
+            valuesSet.B = Round(valuesSet.B);
 
             // act
 
