@@ -158,5 +158,84 @@ namespace PolynomialCore.Test
             poly.ExtremeValues.Should().BeEquivalentTo(extremeValues);
         }
 
+        public static IEnumerable<object[]> GetSampleDataForFindMonotinicityTest()
+        {
+            yield return new object[] { "2x+10", (new List<Interval>()
+            {
+                new Interval(null, null, true)
+            },
+            new List<Interval>()
+            )};
+
+            yield return new object[] { "x^2-2x-1", (new List<Interval>()
+            {
+                new Interval(1, null, true)
+            },
+            new List<Interval>()
+            {
+                new Interval(null, 1, true)
+            })};
+
+            yield return new object[] { "x^3-1", (new List<Interval>()
+            {
+                new Interval(null, null, true)
+            },
+            new List<Interval>()
+            )};
+
+            yield return new object[] { "x^3+4x^2-3x-18", (new List<Interval>()
+            {
+                new Interval(null, -3, true),
+                new Interval(0.3333333333333, null, true)
+            },
+            new List<Interval>()
+            {
+                new Interval(-3, 0.3333333333333, true)
+            })};
+        }
+
+        [MemberData(nameof(GetSampleDataForFindMonotinicityTest))]
+        [Theory]
+        public void FindMonotinicity_ForGivenPolynomialFormlua_FindsCorrectMonotinicity(string polynomialFormula, (List<Interval> increasing, List<Interval> decreasing) monotinicity)
+        {
+            // arrange
+
+            var poly = new Polynomial(polynomialFormula);
+
+            foreach (var increasing in monotinicity.increasing)
+            {
+                increasing.A = increasing.A == null ? null : Round((double)increasing.A);
+                increasing.B = increasing.B == null ? null : Round((double)increasing.B);
+            }
+
+            foreach (var decreasing in monotinicity.decreasing)
+            {
+                decreasing.A = decreasing.A == null ? null : Round((double)decreasing.A);
+                decreasing.B = decreasing.B == null ? null : Round((double)decreasing.B);
+            }
+
+            // act
+
+            poly.FindMonotinicity();
+
+            poly.Monotinicity.Should().NotBeNull();
+
+            foreach (var increasing in poly.Monotinicity!.Value.increasing)
+            {
+                increasing.A = increasing.A == null ? null : Round((double)increasing.A);
+                increasing.B = increasing.B == null ? null : Round((double)increasing.B);
+            }
+
+            foreach (var decreasing in poly.Monotinicity!.Value.decreasing)
+            {
+                decreasing.A = decreasing.A == null ? null : Round((double)decreasing.A);
+                decreasing.B = decreasing.B == null ? null : Round((double)decreasing.B);
+            }
+
+            // assert
+
+            poly.Monotinicity.Should().BeEquivalentTo(monotinicity);
+        }
+
     }
 }
