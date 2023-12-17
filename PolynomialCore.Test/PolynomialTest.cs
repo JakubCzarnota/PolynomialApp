@@ -400,5 +400,79 @@ namespace PolynomialCore.Test
 
         }
 
+        public static IEnumerable<object[]> GetSampleDataForGetPointsForGraphTests()
+        {
+            yield return new object[] { "2x+10",
+                new List<Point>()
+                {
+                    new Point(-7, -4),
+                    new Point(-5, 0),
+                    new Point(7, 24),
+                }
+            };
+            
+            yield return new object[] { "x^2-2x-1",
+                new List<Point>()
+                {
+                    new Point(-5, 34),
+                    new Point(-0.4142135623731, 0),
+                    new Point(1, -2),
+                    new Point(2.4142135623731, 0),
+                    new Point(5, 14)
+                }
+            };
+
+            yield return new object[] { "x^3-1",
+                new List<Point>()
+                {
+                    new Point(-3, -28),
+                    new Point(1, 0),
+                    new Point(3, 26),
+                }
+            };
+            
+            yield return new object[] { "x^3+4x^2-3x-18",
+                new List<Point>()
+                {
+                    new Point(-5, -28),
+                    new Point(-3, 0),
+                    new Point(0.3333333333333, -18.5185185185185),
+                    new Point(2, 0),
+                    new Point(5, 192)
+                }
+            };
+        }
+
+        [MemberData(nameof(GetSampleDataForGetPointsForGraphTests))]
+        [Theory]
+        public void GetPointsForGraph_ForGivenPolynomialFormlua_ReturnsCorrectPoints(string polynomialFormula, List<Point> points) 
+        {
+
+            // arrange
+
+            var poly = new Polynomial(polynomialFormula);
+
+            foreach (var point in points)
+            {
+                point.X = Round(point.X);
+                point.Y = Round(point.Y);
+            }
+
+            // act
+
+            var result = poly.GetPointsForGraph();
+
+            foreach (var point in result)
+            {
+                point.X = Round(point.X);
+                point.Y = Round(point.Y);
+            }
+
+            // assert
+
+            result.Should().BeEquivalentTo(points);
+
+        }
+
     }
 }
