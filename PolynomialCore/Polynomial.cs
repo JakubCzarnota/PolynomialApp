@@ -651,7 +651,7 @@ namespace PolynomialCore
         /// <summary>
         /// Finds for which x, y is positive and  for which x, y is negative
         /// </summary>
-        public void FindPositiveAndNegativeValuse()
+        public void FindPositiveAndNegativeValues()
         {
             List<Interval> positiveValues = new List<Interval>();
             List<Interval> negativeValues = new List<Interval>();
@@ -698,7 +698,7 @@ namespace PolynomialCore
         {
 
             if (PositiveValues == null || NegativeValues == null)
-                FindPositiveAndNegativeValuse();
+                FindPositiveAndNegativeValues();
 
             double? a = null;
             double? b = null;

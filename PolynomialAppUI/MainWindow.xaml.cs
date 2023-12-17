@@ -47,7 +47,7 @@ namespace PolynomialAppUI
                 newPoly.FindRoots();
                 newPoly.FindExtremeValues();
                 newPoly.FindMonotinicity();
-                newPoly.FindPositiveAndNegativeValuse();
+                newPoly.FindPositiveAndNegativeValues();
                 newPoly.FindValuesSet();
 
                 _dataContext.Polynomial = newPoly;
