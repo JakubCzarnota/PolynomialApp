@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,76 +57,106 @@ namespace PolynomialCore.Test
             result.Should().Be(Round(y));
         }
 
-        [InlineData("2x+10", new double[] { -5 }, new int[] { 1 })]
-        [InlineData("x^2-2x+1", new double[] { 1 }, new int[] { 2 })]
-        [InlineData("x^2+1", new double[0], new int[0])]
-        [InlineData("x^3+4x^2-3x-18", new double[] { -3, 2 }, new int[] { 2, 1 })]
-        [InlineData("x^4-x^3+2x-1", new double[] { -1.1537213755418, 0.5356873867919 }, new int[] { 1, 1 })]
+        public static IEnumerable<object[]> GetSampleDataForFindRootsTest()
+        {
+            yield return new object[] { "2x+10", new List<Root>() 
+            {
+                new Root(-5, 1)
+            }};
+            yield return new object[] { "x^2-2x+1", new List<Root>() 
+            {
+                new Root(1, 2)
+            }};
+            yield return new object[] { "x^2+1", new List<Root>() {}};
+            yield return new object[] { "x^3+4x^2-3x-18", new List<Root>() 
+            {
+                new Root(-3, 2),
+                new Root(2, 1)
+            }};
+            yield return new object[] { "x^4-x^3+2x-1", new List<Root>() 
+            {
+                new Root(-1.1537213755418, 1),
+                new Root(0.5356873867919, 1)
+            }};
+        }
+
+        [MemberData(nameof(GetSampleDataForFindRootsTest))]
         [Theory]
-        public void FindRoots_ForGivenPolynomialFormlua_ReturnsCorrectRoots(string polynomialFormula, double[] rootsValue, int[] rootsMultiplicity)
+        public void FindRoots_ForGivenPolynomialFormlua_ReturnsCorrectRoots(string polynomialFormula, List<Root> roots)
         {
             // arrange 
 
             var number = Math.Pow(10, DECIMAL_PRECISION);
 
-            var poly = new Polynomial(polynomialFormula);
+            foreach (var root in roots)
+            {
+                root.Value = Round(root.Value);
+            }
 
+            var poly = new Polynomial(polynomialFormula);
 
             // act
 
             poly.FindRoots();
 
-            // assert
-
             poly.Roots.Should().NotBeNull();
-            poly.Roots!.Count.Should().Be(rootsValue.Length);
 
-            for (int i = 0; i < poly.Roots.Count; i++)
+            foreach (var root in poly.Roots!)
             {
-                var root = poly.Roots![i];
-
-                var rootValue = rootsValue[i];
-
-                var rootMultiplicity = rootsMultiplicity[i];
-
-                Round(root.Value).Should().Be(Round(rootValue));
-                root.Multiplicity.Should().Be(rootMultiplicity);
+                root.Value = Round(root.Value);
             }
 
+            // assert
+
+            poly.Roots.Should().BeEquivalentTo(roots);
 
         }
 
-        [InlineData("2x+10", new double[0], new double[0])]
-        [InlineData("x^2-2x-1", new double[] { 1 }, new double[] { -2 })]
-        [InlineData("x^3-1", new double[0], new double[0])]
-        [InlineData("x^3+4x^2-3x-18", new double[] { -3, 0.33333333333333 }, new double[] { 0, -18.5185185185185 })]
+        public static IEnumerable<object[]> GetSampleDataForFindExtremeValuesTest()
+        {
+            yield return new object[] { "2x+10", new List<Point>() };
+            yield return new object[] { "x^2-2x-1", new List<Point>()
+            {
+                new Point(1, -2)
+            }};
+            yield return new object[] { "x^3-1", new List<Point>() };
+            yield return new object[] { "x^3+4x^2-3x-18", new List<Point>()
+            {
+                new Point(-3, 0),
+                new Point(0.3333333333333, -18.5185185185185)
+            }};
+        }
+
+        [MemberData(nameof(GetSampleDataForFindExtremeValuesTest))]
         [Theory]
-        public void FindExtremeValues_ForGivenPolynomialFormlua_FindsExtremeValues(string polynomialFormula, double[] extremeValuesX, double[] extremeValuesY)
+        public void FindExtremeValues_ForGivenPolynomialFormlua_FindsExtremeValues(string polynomialFormula, List<Point> extremeValues)
         {
             // arrange
 
             var poly = new Polynomial(polynomialFormula);
 
-            var extremeValues = new List<Point>();
-
-            for (int i = 0; i < extremeValuesX.Length; i++)
+            foreach (var extremeValue in extremeValues)
             {
-                extremeValues.Add(new Point(Round(extremeValuesX[i]), Round(extremeValuesY[i])));
+                extremeValue.X = Round(extremeValue.X);
+                extremeValue.Y = Round(extremeValue.Y);
             }
 
             // act
 
             poly.FindExtremeValues();
 
-            for (int i = 0; i < poly.ExtremeValues!.Count; i++)
+            poly.ExtremeValues.Should().NotBeNull();
+
+            foreach (var extremeValue in poly.ExtremeValues!)
             {
-                poly.ExtremeValues![i].X = Round(poly.ExtremeValues![i].X);
-                poly.ExtremeValues![i].Y = Round(poly.ExtremeValues![i].Y);
+                extremeValue.X = Round(extremeValue.X);
+                extremeValue.Y = Round(extremeValue.Y);
             }
 
             // assert
 
             poly.ExtremeValues.Should().BeEquivalentTo(extremeValues);
         }
+
     }
 }
