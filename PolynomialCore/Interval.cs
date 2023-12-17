@@ -13,6 +13,11 @@ namespace PolynomialCore
     public class Interval
     {
         /// <summary>
+        /// Represents plus and minus infinity
+        /// </summary>
+        public static readonly double? Infinity = null;
+
+        /// <summary>
         /// Left value of this interval
         /// </summary>
         public double? A { get; set; }

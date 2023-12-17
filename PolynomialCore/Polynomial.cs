@@ -637,9 +637,9 @@ namespace PolynomialCore
             }
 
             if (isIncreasing)
-                increasing.Add(new Interval(null, b, true));
+                increasing.Add(new Interval(Interval.Infinity, b, true));
             else
-                decreasing.Add(new Interval(null, b, true));
+                decreasing.Add(new Interval(Interval.Infinity, b, true));
 
             increasing.Reverse();
             decreasing.Reverse();
@@ -680,9 +680,9 @@ namespace PolynomialCore
             }
 
             if (isPositive)
-                positiveValues.Add(new Interval(null, b));
+                positiveValues.Add(new Interval(Interval.Infinity, b));
             else
-                negativeValues.Add(new Interval(null, b));
+                negativeValues.Add(new Interval(Interval.Infinity, b));
 
             positiveValues.Reverse();
             negativeValues.Reverse();

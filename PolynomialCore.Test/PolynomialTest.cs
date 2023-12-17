@@ -181,7 +181,7 @@ namespace PolynomialCore.Test
             yield return new object[] { "2x+10", 
                 (new List<Interval>()
                 {
-                    new Interval(null, null, true)
+                    new Interval(Interval.Infinity, Interval.Infinity, true)
                 },
                 new List<Interval>())
             };
@@ -189,18 +189,18 @@ namespace PolynomialCore.Test
             yield return new object[] { "x^2-2x-1", 
                 (new List<Interval>()
                 {
-                    new Interval(1, null, true)
+                    new Interval(1, Interval.Infinity, true)
                 },
                 new List<Interval>()
                 {
-                    new Interval(null, 1, true)
+                    new Interval(Interval.Infinity, 1, true)
                 })
             };
 
             yield return new object[] { "x^3-1", 
                 (new List<Interval>()
                 {
-                    new Interval(null, null, true)
+                    new Interval(Interval.Infinity, Interval.Infinity, true)
                 },
                 new List<Interval>())
             };
@@ -208,8 +208,8 @@ namespace PolynomialCore.Test
             yield return new object[] { "x^3+4x^2-3x-18", 
                 (new List<Interval>()
                 {
-                    new Interval(null, -3, true),
-                    new Interval(0.3333333333333, null, true)
+                    new Interval(Interval.Infinity, -3, true),
+                    new Interval(0.3333333333333, Interval.Infinity, true)
                 },
                 new List<Interval>()
                 {
@@ -228,14 +228,14 @@ namespace PolynomialCore.Test
 
             foreach (var increasing in monotinicity.increasing)
             {
-                increasing.A = increasing.A == null ? null : Round((double)increasing.A);
-                increasing.B = increasing.B == null ? null : Round((double)increasing.B);
+                increasing.A = increasing.A == Interval.Infinity ? Interval.Infinity : Round((double)increasing.A!);
+                increasing.B = increasing.B == Interval.Infinity ? Interval.Infinity : Round((double)increasing.B!);
             }
 
             foreach (var decreasing in monotinicity.decreasing)
             {
-                decreasing.A = decreasing.A == null ? null : Round((double)decreasing.A);
-                decreasing.B = decreasing.B == null ? null : Round((double)decreasing.B);
+                decreasing.A = decreasing.A == Interval.Infinity ? Interval.Infinity : Round((double)decreasing.A!);
+                decreasing.B = decreasing.B == Interval.Infinity ? Interval.Infinity : Round((double)decreasing.B!);
             }
 
             // act
@@ -246,14 +246,14 @@ namespace PolynomialCore.Test
 
             foreach (var increasing in poly.Monotinicity!.Value.increasing)
             {
-                increasing.A = increasing.A == null ? null : Round((double)increasing.A);
-                increasing.B = increasing.B == null ? null : Round((double)increasing.B);
+                increasing.A = increasing.A == Interval.Infinity ? Interval.Infinity : Round((double)increasing.A!);
+                increasing.B = increasing.B == Interval.Infinity ? Interval.Infinity : Round((double)increasing.B!);
             }
 
             foreach (var decreasing in poly.Monotinicity!.Value.decreasing)
             {
-                decreasing.A = decreasing.A == null ? null : Round((double)decreasing.A);
-                decreasing.B = decreasing.B == null ? null : Round((double)decreasing.B);
+                decreasing.A = decreasing.A == Interval.Infinity ? Interval.Infinity : Round((double)decreasing.A!);
+                decreasing.B = decreasing.B == Interval.Infinity ? Interval.Infinity : Round((double)decreasing.B!);
             }
 
             // assert
@@ -266,19 +266,19 @@ namespace PolynomialCore.Test
             yield return new object[] { "2x+10",
                 new List<Interval>()
                 {
-                    new Interval(-5, null)
+                    new Interval(-5, Interval.Infinity)
                 },
                 new List<Interval>()
                 {
-                    new Interval(null, -5)
+                    new Interval(Interval.Infinity, -5)
                 }
             };
 
             yield return new object[] { "x^2-2x-1",
                 new List<Interval>()
                 {
-                    new Interval(null, -0.4142135623731),
-                    new Interval(2.4142135623731, null)
+                    new Interval(Interval.Infinity, -0.4142135623731),
+                    new Interval(2.4142135623731, Interval.Infinity)
                 },
                 new List<Interval>()
                 {
@@ -289,22 +289,22 @@ namespace PolynomialCore.Test
             yield return new object[] { "x^3-1",
                 new List<Interval>()
                 {
-                    new Interval(1, null)
+                    new Interval(1, Interval.Infinity)
                 },
                 new List<Interval>()
                 {
-                    new Interval(null, 1)
+                    new Interval(Interval.Infinity, 1)
                 }
             };
 
             yield return new object[] { "x^3+4x^2-3x-18",
             new List<Interval>()
                 {
-                    new Interval(2, null)
+                    new Interval(2, Interval.Infinity)
                 },
                 new List<Interval>()
                 {
-                    new Interval(null, -3),
+                    new Interval(Interval.Infinity, -3),
                     new Interval(-3, 2)            
                 }
             };
@@ -320,14 +320,14 @@ namespace PolynomialCore.Test
 
             foreach (var interval in positiveValues)
             {
-                interval.A = interval.A == null ? null : Round((double)interval.A);
-                interval.B = interval.B == null ? null : Round((double)interval.B);
+                interval.A = interval.A == Interval.Infinity ? Interval.Infinity : Round((double)interval.A!);
+                interval.B = interval.B == Interval.Infinity ? Interval.Infinity : Round((double)interval.B!);
             }
             
             foreach (var interval in negativeValues)
             {
-                interval.A = interval.A == null ? null : Round((double)interval.A);
-                interval.B = interval.B == null ? null : Round((double)interval.B);
+                interval.A = interval.A == Interval.Infinity ? Interval.Infinity : Round((double)interval.A!);
+                interval.B = interval.B == Interval.Infinity ? Interval.Infinity : Round((double)interval.B!);
             }
 
             // act
@@ -339,14 +339,14 @@ namespace PolynomialCore.Test
 
             foreach (var interval in poly.PositiveValues!)
             {
-                interval.A = interval.A == null ? null : Round((double)interval.A);
-                interval.B = interval.B == null ? null : Round((double)interval.B);
+                interval.A = interval.A == Interval.Infinity ? Interval.Infinity : Round((double)interval.A!);
+                interval.B = interval.B == Interval.Infinity ? Interval.Infinity : Round((double)interval.B!);
             }
 
             foreach (var interval in poly.NegativeValues!)
             {
-                interval.A = interval.A == null ? null : Round((double)interval.A);
-                interval.B = interval.B == null ? null : Round((double)interval.B);
+                interval.A = interval.A == Interval.Infinity ? Interval.Infinity : Round((double)interval.A!);
+                interval.B = interval.B == Interval.Infinity ? Interval.Infinity : Round((double)interval.B!);
             }
 
             // assert
@@ -357,10 +357,10 @@ namespace PolynomialCore.Test
 
         public static IEnumerable<object[]> GetSampleDataForFindValuesSetTests()
         {
-            yield return new object[] { "2x+10", new Interval(null, null, true) };
-            yield return new object[] { "x^2-2x-1", new Interval(-2, null, true) };
-            yield return new object[] { "x^3-1", new Interval(null, null, true) };
-            yield return new object[] { "x^3+4x^2-3x-18", new Interval(null, null, true) };
+            yield return new object[] { "2x+10", new Interval(Interval.Infinity, Interval.Infinity, true) };
+            yield return new object[] { "x^2-2x-1", new Interval(-2, Interval.Infinity, true) };
+            yield return new object[] { "x^3-1", new Interval(Interval.Infinity, Interval.Infinity, true) };
+            yield return new object[] { "x^3+4x^2-3x-18", new Interval(Interval.Infinity, Interval.Infinity, true) };
         }
 
         [MemberData(nameof(GetSampleDataForFindValuesSetTests))]
@@ -371,8 +371,8 @@ namespace PolynomialCore.Test
 
             var poly = new Polynomial(polynomialFormula);
 
-            valuesSet.A = valuesSet.A == null ? null : Round((double)valuesSet.A);
-            valuesSet.B = valuesSet.B == null ? null : Round((double)valuesSet.B);
+            valuesSet.A = valuesSet.A == Interval.Infinity ? Interval.Infinity : Round((double)valuesSet.A!);
+            valuesSet.B = valuesSet.B == Interval.Infinity ? Interval.Infinity : Round((double)valuesSet.B!);
 
             // act
 
@@ -380,8 +380,8 @@ namespace PolynomialCore.Test
 
             poly.ValuesSet.Should().NotBeNull();
 
-            poly.ValuesSet!.A = poly.ValuesSet!.A == null ? null : Round((double)poly.ValuesSet!.A);
-            poly.ValuesSet!.B = poly.ValuesSet!.B == null ? null : Round((double)poly.ValuesSet!.B);
+            poly.ValuesSet!.A = poly.ValuesSet!.A == Interval.Infinity ? Interval.Infinity : Round((double)poly.ValuesSet!.A!);
+            poly.ValuesSet!.B = poly.ValuesSet!.B == Interval.Infinity ? Interval.Infinity : Round((double)poly.ValuesSet!.B!);
 
             // assert
 
