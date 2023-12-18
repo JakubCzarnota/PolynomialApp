@@ -594,14 +594,22 @@ namespace PolynomialCore
         /// </summary>
         public void FindMonotinicity()
         {
+
+            List<Interval> increasing = new List<Interval>();
+            List<Interval> decreasing = new List<Interval>();
+
+            // for degree = 0 empty lists
+            if(Degree == 0 )
+            {
+                Monotinicity = (increasing, decreasing);
+                return;
+            }
+
             if (Roots == null)
                 FindRoots();
 
             if(ExtremeValues ==  null)
                 FindExtremeValues();
-
-            List<Interval> increasing = new List<Interval>();
-            List<Interval> decreasing = new List<Interval>();
 
             // multiplicity = 0 for ExtremeValues
             List<(double x, int multiplicity)> points = new List<(double x, int multiplicity)>();
