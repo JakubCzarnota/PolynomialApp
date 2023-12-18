@@ -1000,7 +1000,12 @@ namespace PolynomialCore
                     if (coefficient >= 0)
                         st += "+";
 
-                    st += coefficient + "x^" + i;
+                    if (coefficient == -1)
+                        st += "-";
+                    else if (coefficient != 1)
+                        st += coefficient;
+
+                    st += "x^" + i;
                 }
             }
 
@@ -1011,7 +1016,12 @@ namespace PolynomialCore
                 if (coefficient >= 0)
                     st += "+";
 
-                st += coefficient + "x";
+                if (coefficient == -1)
+                    st += "-";
+                else if (coefficient != 1)
+                    st += coefficient;
+
+                st += "x";
             }
 
             if (Coefficients.Length >= 1 && Coefficients[0] != 0)

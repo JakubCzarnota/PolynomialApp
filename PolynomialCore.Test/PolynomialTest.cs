@@ -636,6 +636,31 @@ namespace PolynomialCore.Test
             resultCoefficients.Should().BeEquivalentTo(resultPolynomialCoefficients);
         }
 
+        public static IEnumerable<object[]> GetSampleDataForToStringTests()
+        {
+            yield return new object[] { new Polynomial("35"), "35" };
+            yield return new object[] { new Polynomial("-35"),"-35" };
+            yield return new object[] { new Polynomial("3x+1"), "3x+1" };
+            yield return new object[] { new Polynomial("-x^3-x^2-x-1"), "-x^3-x^2-x-1" };
+            yield return new object[] { new Polynomial("x"), "x" };
+            yield return new object[] { new Polynomial("5x^2+2x-10"), "5x^2+2x-10" };
+            yield return new object[] { new Polynomial("13x^3-20x+0"), "13x^3-20x" };
+        }
+
+        [MemberData(nameof(GetSampleDataForToStringTests))]
+        [Theory]
+        public void ToString_ReturnsCorrectString(Polynomial polynomial, string formula)
+        {
+            // arrange
+
+            // act
+
+            var result = polynomial.ToString();
+
+            // assert
+
+            result.Should().Be(formula);
+        }
 
     }
 }
