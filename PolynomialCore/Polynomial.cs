@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -167,7 +168,10 @@ namespace PolynomialCore
             else if (coefficient == "-")
                 return -1;
             else
-                return Double.Parse(coefficient);
+            {
+                coefficient = coefficient.Replace(',', '.');
+                return Double.Parse(coefficient, NumberStyles.Any, CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>
