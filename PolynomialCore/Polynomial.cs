@@ -705,6 +705,13 @@ namespace PolynomialCore
         public void FindValuesSet()
         {
 
+            // one element interval for polynomials with degree = 0
+            if(Degree == 0)
+            {
+                ValuesSet = new Interval(Coefficients[0], Coefficients[0], true);
+                return;
+            }
+
             if (PositiveValues == null || NegativeValues == null)
                 FindPositiveAndNegativeValues();
 
