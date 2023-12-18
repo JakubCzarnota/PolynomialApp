@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -28,6 +29,8 @@ namespace PolynomialCore.Test
             return Math.Round((double)(x * number)) / number;
         }
 
+        [InlineData("25", new double[] { 25 }, 0)]
+        [InlineData("x", new double[] { 1, 0}, 1)]
         [InlineData("3x+1", new double[] { 1, 3 }, 1)]
         [InlineData("5x^2+2x-10", new double[] { -10, 2, 5 }, 2)]
         [InlineData("13x^3-20x+0", new double[] { 0, -20, 0, 13 }, 3)]

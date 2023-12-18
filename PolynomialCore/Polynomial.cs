@@ -177,7 +177,7 @@ namespace PolynomialCore
         /// <returns>Degree</returns>
         private int FindDegree(string polynomial)
         {
-            int degree = -1;
+            int degree = 0;
 
             for (int i = 0; i < polynomial.Length; i++)
             {
