@@ -53,6 +53,8 @@ namespace PolynomialCore.Test
 
         public static IEnumerable<object[]> GetSampleDataForYTests()
         {
+            yield return new object[] { new Polynomial("35"), -2, 35 };
+            yield return new object[] { new Polynomial("-35"), 0, -35 };
             yield return new object[] { new Polynomial("3x+1"), 2, 7 };
             yield return new object[] { new Polynomial("5x^2+2x-10"), 1.5, 4.25 };
             yield return new object[] { new Polynomial("13x^3-20x+0"), 0.5, -8.375 };
@@ -75,6 +77,8 @@ namespace PolynomialCore.Test
 
         public static IEnumerable<object[]> GetSampleDataForFindRootsTests()
         {
+            yield return new object[] { new Polynomial("35"), new List<Root>() { } };
+            
             yield return new object[] { new Polynomial("2x+10"),
                 new List<Root>()
                 {
@@ -138,6 +142,8 @@ namespace PolynomialCore.Test
 
         public static IEnumerable<object[]> GetSampleDataForFindExtremeValuesTests()
         {
+            yield return new object[] { new Polynomial("35"), new List<Point>() };
+
             yield return new object[] { new Polynomial("2x+10"), new List<Point>() };
 
             yield return new object[] { new Polynomial("x^2-2x-1"),
@@ -189,6 +195,8 @@ namespace PolynomialCore.Test
 
         public static IEnumerable<object[]> GetSampleDataForFindMonotinicityTests()
         {
+            yield return new object[] { new Polynomial("35"), (new List<Interval>(), new List<Interval>()) };
+
             yield return new object[] { new Polynomial("2x+10"),
                 (new List<Interval>()
                 {
@@ -272,6 +280,22 @@ namespace PolynomialCore.Test
 
         public static IEnumerable<object[]> GetSampleDataForFindPositiveAndNegativeValuesTests()
         {
+            yield return new object[] { new Polynomial("35"),
+                new List<Interval>()
+                {
+                    new Interval(Interval.Infinity, Interval.Infinity)
+                },
+                new List<Interval>()
+            };         
+            
+            yield return new object[] { new Polynomial("-35"),
+                new List<Interval>(),
+                new List<Interval>()
+                {
+                    new Interval(Interval.Infinity, Interval.Infinity)
+                }
+            };
+
             yield return new object[] { new Polynomial("2x+10"),
                 new List<Interval>()
                 {
@@ -364,6 +388,8 @@ namespace PolynomialCore.Test
 
         public static IEnumerable<object[]> GetSampleDataForFindValuesSetTests()
         {
+            yield return new object[] { new Polynomial("35"), new Interval(35, 35, true) };
+            yield return new object[] { new Polynomial("-35"), new Interval(-35, -35, true) };
             yield return new object[] { new Polynomial("2x+10"), new Interval(Interval.Infinity, Interval.Infinity, true) };
             yield return new object[] { new Polynomial("x^2-2x-1"), new Interval(-2, Interval.Infinity, true) };
             yield return new object[] { new Polynomial("x^3-1"), new Interval(Interval.Infinity, Interval.Infinity, true) };
@@ -396,6 +422,14 @@ namespace PolynomialCore.Test
 
         public static IEnumerable<object[]> GetSampleDataForGetPointsForGraphTests()
         {
+            yield return new object[] { new Polynomial("35"),
+                new List<Point>()
+                {
+                    new Point(-2, 35),
+                    new Point(2, 35),
+                }
+            };
+            
             yield return new object[] { new Polynomial("2x+10"),
                 new List<Point>()
                 {
