@@ -34,6 +34,8 @@ namespace PolynomialCore.Test
         [InlineData("3x+1", new double[] { 1, 3 }, 1)]
         [InlineData("5x^2+2x-10", new double[] { -10, 2, 5 }, 2)]
         [InlineData("13x^3-20x+0", new double[] { 0, -20, 0, 13 }, 3)]
+        [InlineData("(x-2)(x+3)^2", new double[] { -18, -3, 4, 1 }, 3)]
+        [InlineData("2(x-2)(x+3)^2", new double[] { -36, -6, 8, 2 }, 3)]
         [Theory]
         public void Constructor_ForGivenPolynomialFormula_ReturnsCorrectPolynomial(string polynomialFormula, double[] coefficients, int degree)
         {

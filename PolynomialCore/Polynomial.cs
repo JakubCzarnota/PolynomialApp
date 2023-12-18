@@ -65,12 +65,47 @@ namespace PolynomialCore
         /// Create polynomial from formula
         /// </summary>
         /// <param name="polynomial">Polynomial formula as string</param>
-        public Polynomial(string polynomial) {
+        /// <param name="formulaType">Type of formula that polynomial is written in (null for auto-detect)</param>
+        public Polynomial(string polynomial, FormulaTypes? formulaType = null) {
 
             polynomial = polynomial.Replace(" ", "");
 
-            Coefficients = FindCoefficients(polynomial);
-                  
+            switch (formulaType)
+            {
+                case FormulaTypes.General:
+                    Coefficients = FindCoefficientsFromGeneralFormula(polynomial);
+                    break;
+
+                case FormulaTypes.Factored:
+                    Coefficients = FindCoefficiantsFromFactoredFormula(polynomial);
+                    break;
+
+                case null:
+                default:
+
+                    try
+                    {
+                        Coefficients = FindCoefficientsFromGeneralFormula(polynomial);
+                        return;
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    
+                    try
+                    {
+                        Coefficients = FindCoefficiantsFromFactoredFormula(polynomial);
+                        return;
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    throw new ArgumentException("Invalid polynomial formula");
+            }
+
 
         }
 
@@ -95,30 +130,30 @@ namespace PolynomialCore
         /// <summary>
         /// Finds coefficients of this polynomial
         /// </summary>
-        /// <param name="polynomial">String of polynomial formula</param>
+        /// <param name="formula">String of polynomial formula</param>
         /// <returns>Array of coefficients</returns>
-        private double[] FindCoefficients(string polynomial)
+        private double[] FindCoefficientsFromGeneralFormula(string formula)
         {
 
-            int degree = FindDegree(polynomial);
+            int degree = FindDegreeFromGeneralFormula(formula);
 
             double[] coefficients = new double[degree+1];
 
             string temp = "";
 
-            for (int i = 0; i < polynomial.Length; i++)
+            for (int i = 0; i < formula.Length; i++)
             {
-                char c = polynomial[i];
+                char c = formula[i];
 
                 if (c == 'x')
                 {
-                    if ((polynomial.Length - 1) - i >= 2 && polynomial[i + 1] == '^')
+                    if ((formula.Length - 1) - i >= 2 && formula[i + 1] == '^')
                     {
                         string temp2 = "";
 
-                        for (i = i + 2; i < polynomial.Length; i++)
+                        for (i = i + 2; i < formula.Length; i++)
                         {
-                            c = polynomial[i];
+                            c = formula[i];
 
                             if (c == '+' || c == '-')
                                 break;
@@ -136,11 +171,11 @@ namespace PolynomialCore
                         temp = "";
                     }
                 }
-                else if (((polynomial.Length - 1) - i > 1 && (polynomial[i + 1] == '+' || polynomial[i + 1] == '-')))
+                else if (((formula.Length - 1) - i > 1 && (formula[i + 1] == '+' || formula[i + 1] == '-')))
                 {
                     coefficients[0] += ParseCoefficient(temp);
                 }
-                else if (i == polynomial.Length - 1)
+                else if (i == formula.Length - 1)
                 {
                     temp += c;
                     coefficients[0] += ParseCoefficient(temp);
@@ -153,6 +188,89 @@ namespace PolynomialCore
             }
 
             return coefficients;
+
+        }
+
+        private double[] FindCoefficiantsFromFactoredFormula(string formula)
+        {
+            formula = formula.Replace("*", "");
+
+            Polynomial poly;
+
+            Polynomial tempPoly;
+
+            int i;
+            string temp = "";
+
+            for (i = 0; i < formula.Length; i++)
+            {
+                char c = formula[i];
+
+                if (c == '(')
+                    break;
+
+                temp += c;
+            }
+
+            if (temp != "")
+                poly = new Polynomial(temp);
+            else
+                poly = new Polynomial("1");
+
+            temp = "";
+
+            i++;
+
+            for (; i < formula.Length; i++)
+            {
+                char c = formula[i];
+
+                if(c == ')')
+                {
+                    tempPoly = new Polynomial(temp);
+                    temp = "";
+
+                    if(i < formula.Length - 2 && formula[i+1] == '^')
+                    {
+                        i += 2;
+
+                        for (; i < formula.Length; i++)
+                        {
+                            c = formula[i];
+
+                            if (c == '(')
+                                break;
+
+                            temp += c;
+                        }
+
+                        for (int j = int.Parse(temp) - 1; j >= 0; j--)
+                        {
+                            poly *= tempPoly;
+                        }
+
+                        temp = "";
+                    }
+                    else 
+                    {
+
+                        poly *= tempPoly;
+
+                        temp = "";
+
+                        if( i < formula.Length - 2)
+                        {
+                            i += 2;
+                            c = formula[i];
+                        }
+
+                    }
+                }
+
+                temp += c;
+            }
+
+            return poly.Coefficients;
 
         }
 
@@ -177,25 +295,25 @@ namespace PolynomialCore
         /// <summary>
         /// Finds degree of this polynomial
         /// </summary>
-        /// <param name="polynomial">String of polynomial formula</param>
+        /// <param name="formula">String of polynomial formula</param>
         /// <returns>Degree</returns>
-        private int FindDegree(string polynomial)
+        private int FindDegreeFromGeneralFormula(string formula)
         {
             int degree = 0;
 
-            for (int i = 0; i < polynomial.Length; i++)
+            for (int i = 0; i < formula.Length; i++)
             {
-                char c = polynomial[i];
+                char c = formula[i];
 
                 if (c == 'x')
                 {
-                    if ((polynomial.Length - 1) - i >= 2 && polynomial[i + 1] == '^')
+                    if ((formula.Length - 1) - i >= 2 && formula[i + 1] == '^')
                     {
                         string temp = "";
 
-                        for (i = i + 2; i < polynomial.Length; i++)
+                        for (i = i + 2; i < formula.Length; i++)
                         {
-                            c = polynomial[i];
+                            c = formula[i];
 
                             if (c == '+' || c == '-')
                                 break;

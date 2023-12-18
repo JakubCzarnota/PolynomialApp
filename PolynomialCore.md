@@ -3,6 +3,9 @@
 
 ## Contents
 
+- [FormulaTypes](#T-PolynomialCore-FormulaTypes 'PolynomialCore.FormulaTypes')
+  - [Factored](#F-PolynomialCore-FormulaTypes-Factored 'PolynomialCore.FormulaTypes.Factored')
+  - [General](#F-PolynomialCore-FormulaTypes-General 'PolynomialCore.FormulaTypes.General')
 - [Interval](#T-PolynomialCore-Interval 'PolynomialCore.Interval')
   - [#ctor(a,b,autoClose)](#M-PolynomialCore-Interval-#ctor-System-Nullable{System-Double},System-Nullable{System-Double},System-Boolean- 'PolynomialCore.Interval.#ctor(System.Nullable{System.Double},System.Nullable{System.Double},System.Boolean)')
   - [#ctor(a,isAClosed,b,isBClosed)](#M-PolynomialCore-Interval-#ctor-System-Nullable{System-Double},System-Boolean,System-Nullable{System-Double},System-Boolean- 'PolynomialCore.Interval.#ctor(System.Nullable{System.Double},System.Boolean,System.Nullable{System.Double},System.Boolean)')
@@ -18,7 +21,7 @@
   - [X](#P-PolynomialCore-Point-X 'PolynomialCore.Point.X')
   - [Y](#P-PolynomialCore-Point-Y 'PolynomialCore.Point.Y')
 - [Polynomial](#T-PolynomialCore-Polynomial 'PolynomialCore.Polynomial')
-  - [#ctor(polynomial)](#M-PolynomialCore-Polynomial-#ctor-System-String- 'PolynomialCore.Polynomial.#ctor(System.String)')
+  - [#ctor(polynomial,formulaType)](#M-PolynomialCore-Polynomial-#ctor-System-String,System-Nullable{PolynomialCore-FormulaTypes}- 'PolynomialCore.Polynomial.#ctor(System.String,System.Nullable{PolynomialCore.FormulaTypes})')
   - [#ctor(degree)](#M-PolynomialCore-Polynomial-#ctor-System-Int32- 'PolynomialCore.Polynomial.#ctor(System.Int32)')
   - [#ctor(coefficients)](#M-PolynomialCore-Polynomial-#ctor-System-Double[]- 'PolynomialCore.Polynomial.#ctor(System.Double[])')
   - [Coefficients](#P-PolynomialCore-Polynomial-Coefficients 'PolynomialCore.Polynomial.Coefficients')
@@ -31,8 +34,8 @@
   - [ValuesSet](#P-PolynomialCore-Polynomial-ValuesSet 'PolynomialCore.Polynomial.ValuesSet')
   - [AddRoot(value,multiplicity)](#M-PolynomialCore-Polynomial-AddRoot-System-Double,System-Int32- 'PolynomialCore.Polynomial.AddRoot(System.Double,System.Int32)')
   - [Devide(a,b,rest)](#M-PolynomialCore-Polynomial-Devide-PolynomialCore-Polynomial,PolynomialCore-Polynomial,PolynomialCore-Polynomial@- 'PolynomialCore.Polynomial.Devide(PolynomialCore.Polynomial,PolynomialCore.Polynomial,PolynomialCore.Polynomial@)')
-  - [FindCoefficients(polynomial)](#M-PolynomialCore-Polynomial-FindCoefficients-System-String- 'PolynomialCore.Polynomial.FindCoefficients(System.String)')
-  - [FindDegree(polynomial)](#M-PolynomialCore-Polynomial-FindDegree-System-String- 'PolynomialCore.Polynomial.FindDegree(System.String)')
+  - [FindCoefficientsFromGeneralFormula(formula)](#M-PolynomialCore-Polynomial-FindCoefficientsFromGeneralFormula-System-String- 'PolynomialCore.Polynomial.FindCoefficientsFromGeneralFormula(System.String)')
+  - [FindDegreeFromGeneralFormula(formula)](#M-PolynomialCore-Polynomial-FindDegreeFromGeneralFormula-System-String- 'PolynomialCore.Polynomial.FindDegreeFromGeneralFormula(System.String)')
   - [FindExtremeValues()](#M-PolynomialCore-Polynomial-FindExtremeValues 'PolynomialCore.Polynomial.FindExtremeValues')
   - [FindIntervalsWithRoots(interval,sturmSequence)](#M-PolynomialCore-Polynomial-FindIntervalsWithRoots-PolynomialCore-Interval,System-Collections-Generic-List{PolynomialCore-Polynomial}- 'PolynomialCore.Polynomial.FindIntervalsWithRoots(PolynomialCore.Interval,System.Collections.Generic.List{PolynomialCore.Polynomial})')
   - [FindMonotinicity()](#M-PolynomialCore-Polynomial-FindMonotinicity 'PolynomialCore.Polynomial.FindMonotinicity')
@@ -58,6 +61,31 @@
   - [#ctor(value,multiplicity)](#M-PolynomialCore-Root-#ctor-System-Double,System-Int32- 'PolynomialCore.Root.#ctor(System.Double,System.Int32)')
   - [Multiplicity](#P-PolynomialCore-Root-Multiplicity 'PolynomialCore.Root.Multiplicity')
   - [Value](#P-PolynomialCore-Root-Value 'PolynomialCore.Root.Value')
+
+<a name='T-PolynomialCore-FormulaTypes'></a>
+## FormulaTypes `type`
+
+##### Namespace
+
+PolynomialCore
+
+##### Summary
+
+Polynomial's formula's types
+
+<a name='F-PolynomialCore-FormulaTypes-Factored'></a>
+### Factored `constants`
+
+##### Summary
+
+Factored formula
+
+<a name='F-PolynomialCore-FormulaTypes-General'></a>
+### General `constants`
+
+##### Summary
+
+General formula
 
 <a name='T-PolynomialCore-Interval'></a>
 ## Interval `type`
@@ -219,8 +247,8 @@ PolynomialCore
 
 Class representing a polynomial
 
-<a name='M-PolynomialCore-Polynomial-#ctor-System-String-'></a>
-### #ctor(polynomial) `constructor`
+<a name='M-PolynomialCore-Polynomial-#ctor-System-String,System-Nullable{PolynomialCore-FormulaTypes}-'></a>
+### #ctor(polynomial,formulaType) `constructor`
 
 ##### Summary
 
@@ -231,6 +259,7 @@ Create polynomial from formula
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | polynomial | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Polynomial formula as string |
+| formulaType | [System.Nullable{PolynomialCore.FormulaTypes}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{PolynomialCore.FormulaTypes}') | Type of formula that polynomial is written in (null for auto-detect) |
 
 <a name='M-PolynomialCore-Polynomial-#ctor-System-Int32-'></a>
 ### #ctor(degree) `constructor`
@@ -347,8 +376,8 @@ A polynomial resulting from division
 | b | [PolynomialCore.Polynomial](#T-PolynomialCore-Polynomial 'PolynomialCore.Polynomial') | Second polynomial |
 | rest | [PolynomialCore.Polynomial@](#T-PolynomialCore-Polynomial@ 'PolynomialCore.Polynomial@') | Rest from division |
 
-<a name='M-PolynomialCore-Polynomial-FindCoefficients-System-String-'></a>
-### FindCoefficients(polynomial) `method`
+<a name='M-PolynomialCore-Polynomial-FindCoefficientsFromGeneralFormula-System-String-'></a>
+### FindCoefficientsFromGeneralFormula(formula) `method`
 
 ##### Summary
 
@@ -362,10 +391,10 @@ Array of coefficients
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| polynomial | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | String of polynomial formula |
+| formula | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | String of polynomial formula |
 
-<a name='M-PolynomialCore-Polynomial-FindDegree-System-String-'></a>
-### FindDegree(polynomial) `method`
+<a name='M-PolynomialCore-Polynomial-FindDegreeFromGeneralFormula-System-String-'></a>
+### FindDegreeFromGeneralFormula(formula) `method`
 
 ##### Summary
 
@@ -379,7 +408,7 @@ Degree
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| polynomial | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | String of polynomial formula |
+| formula | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | String of polynomial formula |
 
 <a name='M-PolynomialCore-Polynomial-FindExtremeValues'></a>
 ### FindExtremeValues() `method`
