@@ -79,14 +79,17 @@ namespace PolynomialCore
         /// <returns>This interval as a string</returns>
         public override string ToString()
         {
+            if (A == B && A != Infinity)
+                return "{" + A + "}";
+
             string s = "";
 
             s += IsAClosed ? "<" : "(";
-            s += A == null ? "-∞" : ((double)A).ToString("0.#####");
+            s += A == Infinity ? "-∞" : ((double)A!).ToString("0.#####");
 
             s += "; ";
 
-            s += B == null ? "+∞" : ((double)B).ToString("0.#####");
+            s += B == Infinity ? "+∞" : ((double)B!).ToString("0.#####");
             s += IsBClosed ? ">" : ")";
 
             return s;
