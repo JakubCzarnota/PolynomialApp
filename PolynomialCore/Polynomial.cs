@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
@@ -1105,9 +1106,9 @@ namespace PolynomialCore
         }
 
         /// <summary>
-        /// Gets polynomial formula
+        /// Gets polynomial general formula
         /// </summary>
-        /// <returns>Polynomial formula sa string</returns>
+        /// <returns>Polynomial general formula as string</returns>
         public override string ToString()
         {
             string st = "";
@@ -1159,6 +1160,48 @@ namespace PolynomialCore
 
             return st;
 
+        }
+
+        /// <summary>
+        /// Get selected polynomial formula
+        /// </summary>
+        /// <param name="formulaType">Selected polynomial formula</param>
+        /// <returns>Polynomial formula as string</returns>
+        public string ToString(FormulaTypes formulaType)
+        {
+            switch (formulaType)
+            {
+                case FormulaTypes.General:
+                    return ToString();
+                case FormulaTypes.Factored:
+
+                    string st = "";
+
+                    if (Coefficients[Coefficients.Length - 1] != 1)
+                        st += Coefficients[Coefficients.Length - 1].ToString();
+
+                    if (Roots == null)
+                        FindRoots();
+
+                    foreach (var root in Roots!)
+                    {
+                        if (root.Value == 0)
+                            st += root.Multiplicity > 1 ? $"x^{root.Multiplicity}" : "x";
+                    }
+
+                    foreach (var root in Roots)
+                    {
+                        if (root.Value > 0)
+                            st += root.Multiplicity > 1 ? $"(x-{root.Value})^{root.Multiplicity}" : $"(x-{root.Value})";
+                        else if (root.Value < 0)
+                            st += root.Multiplicity > 1 ? $"(x+{Math.Abs(root.Value)})^{root.Multiplicity}" : $"(x+{Math.Abs(root.Value)})";
+                    }
+
+                    return st;
+
+                default:
+                    throw new InvalidEnumArgumentException();
+            }
         }
 
     }

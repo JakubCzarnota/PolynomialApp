@@ -50,6 +50,7 @@
   - [NewtonRaphson(x0,derivative)](#M-PolynomialCore-Polynomial-NewtonRaphson-System-Double,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.NewtonRaphson(System.Double,PolynomialCore.Polynomial)')
   - [ParseCoefficient(coefficient)](#M-PolynomialCore-Polynomial-ParseCoefficient-System-String- 'PolynomialCore.Polynomial.ParseCoefficient(System.String)')
   - [ToString()](#M-PolynomialCore-Polynomial-ToString 'PolynomialCore.Polynomial.ToString')
+  - [ToString(formulaType)](#M-PolynomialCore-Polynomial-ToString-PolynomialCore-FormulaTypes- 'PolynomialCore.Polynomial.ToString(PolynomialCore.FormulaTypes)')
   - [Y(x)](#M-PolynomialCore-Polynomial-Y-System-Double- 'PolynomialCore.Polynomial.Y(System.Double)')
   - [op_Addition(a,b)](#M-PolynomialCore-Polynomial-op_Addition-PolynomialCore-Polynomial,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.op_Addition(PolynomialCore.Polynomial,PolynomialCore.Polynomial)')
   - [op_Division(a,b)](#M-PolynomialCore-Polynomial-op_Division-PolynomialCore-Polynomial,PolynomialCore-Polynomial- 'PolynomialCore.Polynomial.op_Division(PolynomialCore.Polynomial,PolynomialCore.Polynomial)')
@@ -603,15 +604,32 @@ Coefficient as double
 
 ##### Summary
 
-Gets polynomial formula
+Gets polynomial general formula
 
 ##### Returns
 
-Polynomial formula sa string
+Polynomial general formula as string
 
 ##### Parameters
 
 This method has no parameters.
+
+<a name='M-PolynomialCore-Polynomial-ToString-PolynomialCore-FormulaTypes-'></a>
+### ToString(formulaType) `method`
+
+##### Summary
+
+Get selected polynomial formula
+
+##### Returns
+
+Polynomial formula as string
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| formulaType | [PolynomialCore.FormulaTypes](#T-PolynomialCore-FormulaTypes 'PolynomialCore.FormulaTypes') | Selected polynomial formula |
 
 <a name='M-PolynomialCore-Polynomial-Y-System-Double-'></a>
 ### Y(x) `method`
