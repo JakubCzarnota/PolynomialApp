@@ -260,9 +260,20 @@ namespace PolynomialAppUI
                 }
             };
 
+            double left = -2;
+            double right = 2;
+
+            if (points.Length > 0)
+            {
+                left += points[0].X;
+                right += points[points.Length - 1].X;
+            }
+
+            var edgeValue = Math.Abs(left) > Math.Abs(right) ? Math.Abs(left) : Math.Abs(right);
+
             List<ObservablePoint> observablePoints2 = new List<ObservablePoint>();
 
-            var distance = Math.Abs(points[0].X - points[points.Length - 1].X);
+            var distance = Math.Abs(-edgeValue - edgeValue);
 
             double shift = 0.005;
 
@@ -271,9 +282,9 @@ namespace PolynomialAppUI
                 shift *= 2;
             }
 
-            for (double i = points[0].X; i <= points[points.Length - 1].X; i += shift)
+            for (double i = -edgeValue; i <= edgeValue; i += shift)
             {
-                i = Math.Round(i * 100) / 100;
+                i = Math.Round(i * 10000) / 10000;
                 observablePoints2.Add(new ObservablePoint(i, poly.Y(i)));
             }
 
