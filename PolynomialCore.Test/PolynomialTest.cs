@@ -36,15 +36,18 @@ namespace PolynomialCore.Test
         [InlineData("13x^3-20x+0", new double[] { 0, -20, 0, 13 }, 3)]
         [InlineData("(x-2)(x+3)^2", new double[] { -18, -3, 4, 1 }, 3)]
         [InlineData("2(x-2)(x+3)^2", new double[] { -36, -6, 8, 2 }, 3)]
+        [InlineData("2(x+3)^2(x-2)", new double[] { -36, -6, 8, 2 }, 3)]
+        [InlineData("10(x-2)^3(x+3)^2", new double[] { -720, 600, 100, -150, 0, 10 }, 5)]
+        [InlineData("(x-2)(x+2)", new double[] { -4, 0, 1 }, 2)]
         [Theory]
         public void Constructor_ForGivenPolynomialFormula_ReturnsCorrectPolynomial(string polynomialFormula, double[] coefficients, int degree)
         {
 
             // arrange
 
-            var poly = new Polynomial(polynomialFormula);
-
             // act
+
+            var poly = new Polynomial(polynomialFormula);
 
             // assert
 

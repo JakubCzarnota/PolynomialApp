@@ -213,9 +213,9 @@ namespace PolynomialCore
             }
 
             if (temp != "")
-                poly = new Polynomial(temp);
+                poly = new Polynomial(temp, FormulaTypes.General);
             else
-                poly = new Polynomial("1");
+                poly = new Polynomial("1", FormulaTypes.General);
 
             temp = "";
 
@@ -227,7 +227,7 @@ namespace PolynomialCore
 
                 if(c == ')')
                 {
-                    tempPoly = new Polynomial(temp);
+                    tempPoly = new Polynomial(temp, FormulaTypes.General);
                     temp = "";
 
                     if(i < formula.Length - 2 && formula[i+1] == '^')
@@ -249,7 +249,10 @@ namespace PolynomialCore
                             poly *= tempPoly;
                         }
 
+                        i += temp.Length -1;
+
                         temp = "";
+
                     }
                     else 
                     {
@@ -258,16 +261,15 @@ namespace PolynomialCore
 
                         temp = "";
 
-                        if( i < formula.Length - 2)
+                        if( i < formula.Length - 1)
                         {
-                            i += 2;
-                            c = formula[i];
+                            i += 1;
                         }
 
                     }
                 }
-
-                temp += c;
+                else if(c != '(')
+                    temp += c;
             }
 
             return poly.Coefficients;
