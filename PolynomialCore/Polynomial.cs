@@ -1092,6 +1092,9 @@ namespace PolynomialCore
 
                 tempPoly.Coefficients[tempDeegree] = a1.Coefficients[i] / b.Coefficients[b.Degree];
 
+                if(tempPoly.Coefficients[tempDeegree] == 0)
+                    throw new ArithmeticException("Too low precision, cannot calculate");
+
                 newPoly.Coefficients[tempDeegree] = tempPoly.Coefficients[tempDeegree];
 
                 a1 = a1 - (tempPoly * b);
