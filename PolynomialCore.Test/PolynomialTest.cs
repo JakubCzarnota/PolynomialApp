@@ -57,6 +57,28 @@ namespace PolynomialCore.Test
 
         }
 
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("3x/x")]
+        [InlineData("a3x")]
+        [InlineData("3y")]
+        [InlineData("10x^2+10x^")]
+        [InlineData("|x|")]
+        [InlineData("2x^2+1/3x")]
+        [Theory]
+        public void Constructor_ForInvalidPolynomialFormula_ThrowsArgumentExeption(string polynomialFormula)
+        {
+            // arrange
+
+            // act
+
+            var method = () => new Polynomial(polynomialFormula);
+
+            // assert
+
+            Assert.Throws<ArgumentException>(method);
+        }
+
         public static IEnumerable<object[]> GetSampleDataForYTests()
         {
             yield return new object[] { new Polynomial("0"), 100, 0 };
