@@ -516,6 +516,14 @@ namespace PolynomialCore.Test
         {
             yield return new object[]
             {
+                new Polynomial("2x^2+10"),
+                new Polynomial("-2x^2-6x+8"),
+                new Polynomial("-6x+18"),
+                Operators.add
+            };
+            
+            yield return new object[]
+            {
                 new Polynomial("0"),
                 new Polynomial("0"),
                 new Polynomial("0"),
