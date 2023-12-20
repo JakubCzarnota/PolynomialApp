@@ -71,6 +71,9 @@ namespace PolynomialCore
 
             polynomial = polynomial.Replace(" ", "");
 
+            if(polynomial == "")
+                throw new ArgumentException("Invalid polynomial formula");
+
             switch (formulaType)
             {
                 case FormulaTypes.General:
