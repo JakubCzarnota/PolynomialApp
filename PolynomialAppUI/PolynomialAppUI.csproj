@@ -6,8 +6,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+	<ApplicationIcon>.\icon.ico</ApplicationIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-	  <DocumentationMarkdown>$(MSBuildProjectDirectory)\..\PolynomialUI.md</DocumentationMarkdown>
+	<DocumentationMarkdown>$(MSBuildProjectDirectory)\..\PolynomialUI.md</DocumentationMarkdown>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +21,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PolynomialCore\PolynomialCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
