@@ -120,7 +120,7 @@ namespace PolynomialCore
         public Polynomial(int degree)
         {
             if (degree < 0 || degree > 100)
-                throw new ArithmeticException("Invalid degree");
+                throw new ArgumentException("Invalid degree");
 
             Coefficients = new double[degree+1];
         }
@@ -134,7 +134,7 @@ namespace PolynomialCore
             var degree = coefficients.Length -1;
 
             if (degree < 0 || degree > 100)
-                throw new ArithmeticException("Invalid degree");
+                throw new ArgumentException("Invalid degree");
 
             Coefficients = coefficients;
         }
@@ -150,7 +150,7 @@ namespace PolynomialCore
             int degree = FindDegreeFromGeneralFormula(formula);
 
             if (degree < 0 || degree > 100)
-                throw new ArithmeticException("Invalid polynomial formula");
+                throw new ArgumentException("Invalid degree");
 
 
             double[] coefficients = new double[degree+1];
@@ -291,7 +291,7 @@ namespace PolynomialCore
             var degree = poly.Degree;
 
             if (degree < 0 || degree > 100)
-                throw new ArithmeticException("Invalid degree");
+                throw new ArgumentException("Invalid degree");
 
 
             return poly.Coefficients;
