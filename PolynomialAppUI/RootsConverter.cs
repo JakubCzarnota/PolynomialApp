@@ -15,7 +15,14 @@ namespace PolynomialAppUI
         {
             var poly = value as Polynomial;
 
-            if (poly == null || poly.Roots == null || poly.Roots.Count == 0)
+            if (poly == null)
+                return "Ø";
+
+            if (poly.Degree == 0 && poly.Coefficients[poly.Coefficients.Length -1] == 0)
+                return new Interval(Interval.Infinity, Interval.Infinity).ToString();
+
+
+            if(poly.Roots == null || poly.Roots.Count == 0)
                 return "Ø";
 
             string s = "{";
