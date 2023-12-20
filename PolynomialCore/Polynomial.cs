@@ -1090,6 +1090,9 @@ namespace PolynomialCore
         /// <returns>Polynomial general formula as string</returns>
         public override string ToString()
         {
+            if (Degree == 0 && Coefficients[Coefficients.Length - 1] == 0)
+                return "0";
+
             string st = "";
 
             for (int i = Coefficients.Length - 1; i >= 2; i--)
