@@ -789,6 +789,14 @@ namespace PolynomialCore
             List<Interval> positiveValues = new List<Interval>();
             List<Interval> negativeValues = new List<Interval>();
 
+            if(Degree == 0 && Coefficients[Coefficients.Length -1] == 0)
+            {
+                PositiveValues = positiveValues;
+                NegativeValues = negativeValues;
+
+                return;
+            }
+
             if (Roots == null)
                 FindRoots();
 
