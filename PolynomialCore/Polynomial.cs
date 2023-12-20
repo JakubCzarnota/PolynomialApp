@@ -721,6 +721,9 @@ namespace PolynomialCore
         {
             ExtremeValues = new List<Point>();
 
+            if (Degree == 0)
+                return;  
+
             var derivative = GetDerivative();
 
             derivative.FindRoots();
