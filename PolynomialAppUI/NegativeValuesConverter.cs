@@ -15,12 +15,12 @@ namespace PolynomialAppUI
         {
             var poly = value as Polynomial;
 
-            string s = "f(x)<0⇔x∈";
-
             if(poly == null || poly.NegativeValues == null || poly.NegativeValues.Count < 1)
-                return s + "Ø";
+                return "Ø";
 
-            foreach(var negativeValue in poly.NegativeValues ) 
+            string s = "";
+
+            foreach (var negativeValue in poly.NegativeValues ) 
             {
                 s += negativeValue.ToString() + "∪";
             }

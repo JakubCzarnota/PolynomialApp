@@ -15,12 +15,12 @@ namespace PolynomialAppUI
         {
             var poly = value as Polynomial;
 
-            string s = "f(x)↓⇔x∈";
-
             if (poly == null || poly.Monotinicity == null || poly.Monotinicity.Value.decreasing.Count() < 1)
-                return s + "∅";
+                return "∅";
 
             List<Interval> decreasing = poly.Monotinicity.Value.decreasing;
+
+            string s = "";
 
             foreach (var interval in decreasing)
             {

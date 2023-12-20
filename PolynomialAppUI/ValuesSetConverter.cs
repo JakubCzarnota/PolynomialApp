@@ -15,13 +15,10 @@ namespace PolynomialAppUI
         {
             var poly = value as Polynomial;
 
-            string s = "y∈";
-
             if (poly == null || poly.ValuesSet == null)
-                return s + "Ø";
+                return "Ø";
 
-            return s + poly.ValuesSet;
-
+            return poly.ValuesSet;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

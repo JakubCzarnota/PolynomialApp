@@ -64,8 +64,12 @@
 
                 <TextBlock
                     Style="{StaticResource Value}"
-                    DataContext="{Binding Polynomial}"
-                    Text="{Binding Converter={StaticResource RootsConverter}}"/>
+                    DataContext="{Binding Polynomial}">
+
+                    <Run Text="x∈"/>
+                    <Run Text="{Binding Converter={StaticResource RootsConverter}, Mode=OneWay}"/>
+
+                </TextBlock>
 
                 <TextBlock
                     Style="{StaticResource Title}"
@@ -73,13 +77,21 @@
 
                 <TextBlock
                     Style="{StaticResource Value}"
-                    DataContext="{Binding Polynomial}"
-                    Text="{Binding Converter={StaticResource MonotinicityIncreasingConverter}}"/>
-                
+                    DataContext="{Binding Polynomial}">
+
+                    <Run Text="f(x)↑⇔x∈"/>
+                    <Run Text="{Binding Converter={StaticResource MonotinicityIncreasingConverter}, Mode=OneWay}"/>
+
+                </TextBlock>
+
                 <TextBlock
                     Style="{StaticResource Value}"
-                    DataContext="{Binding Polynomial}"
-                    Text="{Binding Converter={StaticResource MonotinicityDecreasingConverter}}"/>
+                    DataContext="{Binding Polynomial}">
+
+                    <Run Text="f(x)↓⇔x∈"/>
+                    <Run Text="{Binding Converter={StaticResource MonotinicityDecreasingConverter}, Mode=OneWay}"/>
+
+                </TextBlock>
 
                 <TextBlock
                     Style="{StaticResource Title}"
@@ -87,13 +99,21 @@
 
                 <TextBlock
                     Style="{StaticResource Value}"
-                    DataContext="{Binding Polynomial}"
-                    Text="{Binding Converter={StaticResource PositiveValuesConverter}}"/>
+                    DataContext="{Binding Polynomial}">
+
+                    <Run Text="f(x)>0⇔x∈"/>
+                    <Run Text="{Binding Converter={StaticResource PositiveValuesConverter}, Mode=OneWay}"/>
+
+                </TextBlock>
 
                 <TextBlock
                     Style="{StaticResource Value}"
-                    DataContext="{Binding Polynomial}"
-                    Text="{Binding Converter={StaticResource NegativeValuesConverter}}"/>
+                    DataContext="{Binding Polynomial}">
+
+                    <Run Text="f(x)&lt;0⇔x∈"/>
+                    <Run Text="{Binding Converter={StaticResource NegativeValuesConverter}, Mode=OneWay}"/>
+
+                </TextBlock>
 
                 <TextBlock
                     Style="{StaticResource Title}"
@@ -101,8 +121,12 @@
 
                 <TextBlock
                     Style="{StaticResource Value}"
-                    DataContext="{Binding Polynomial}"
-                    Text="{Binding Converter={StaticResource ValuesSetConverter}}"/>
+                    DataContext="{Binding Polynomial}">               
+                    
+                    <Run Text="y∈"/>
+                    <Run Text="{Binding Converter={StaticResource ValuesSetConverter}, Mode=OneWay}"/>
+
+                </TextBlock>
 
 
             </StackPanel>

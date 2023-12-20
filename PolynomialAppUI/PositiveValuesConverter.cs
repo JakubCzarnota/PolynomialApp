@@ -15,10 +15,10 @@ namespace PolynomialAppUI
         {
             var poly = value as Polynomial;
 
-            string s = "f(x)>0⇔x∈";
-
             if (poly == null || poly.PositiveValues == null || poly.PositiveValues.Count < 1)
-                return s + "Ø";
+                return "Ø";
+
+            string s = "";
 
             foreach (var positiveValues in poly.PositiveValues)
             {

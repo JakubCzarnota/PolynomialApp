@@ -15,12 +15,10 @@ namespace PolynomialAppUI
         {
             var poly = value as Polynomial;
 
-            string s = "x∈";
-
             if (poly == null || poly.Roots == null || poly.Roots.Count == 0)
-                return s + "Ø";
+                return "Ø";
 
-            s += "{";
+            string s = "{";
 
             foreach (var root in poly.Roots)
             {
