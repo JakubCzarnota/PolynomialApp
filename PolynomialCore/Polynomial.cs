@@ -934,16 +934,34 @@ namespace PolynomialCore
         {
             int degree = a.Degree > b.Degree ? a.Degree : b.Degree;
 
-            Polynomial newPoly = new Polynomial(degree);
+            double[] newCoefficients = new double[degree + 1];
 
             for (int i = 0; i < a.Coefficients.Length; i++)
             {
-                newPoly.Coefficients[i] += a.Coefficients[i];
+                newCoefficients[i] += a.Coefficients[i];
             }
 
             for (int i = 0; i < b.Coefficients.Length; i++)
             {
-                newPoly.Coefficients[i] += b.Coefficients[i];
+                newCoefficients[i] += b.Coefficients[i];
+            }
+
+            int newDegree = 0;
+
+            for (int i = newCoefficients.Length - 1; i >= 0; i--)
+            {
+                if (newCoefficients[i] != 0)
+                {
+                    newDegree = i;
+                    break;
+                }
+            }
+
+            Polynomial newPoly = new Polynomial(newDegree);
+
+            for (int i = 0; i < newPoly.Coefficients.Length; i++)
+            {
+                newPoly.Coefficients[i] = newCoefficients[i];
             }
 
             return newPoly;
