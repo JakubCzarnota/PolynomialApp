@@ -91,6 +91,21 @@ namespace PolynomialAppUI
             }
         }
 
+        private string _exceptionMessage = "";
+
+        public string ExceptionMessage
+        {
+            get
+            {
+                return _exceptionMessage;
+            }
+            set
+            {
+                _exceptionMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ISeries[] _series = { new LineSeries<ObservablePoint>()};
 
         public ISeries[] Series

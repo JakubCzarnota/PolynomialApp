@@ -65,11 +65,15 @@ namespace PolynomialAppUI
                 chart.XAxes.First().MinLimit = null;
                 chart.XAxes.First().MaxLimit = null;
 
+                _dataContext.ExceptionMessage = "";
+
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 _dataContext.Polynomial = null;
                 _dataContext.Series = new ISeries[0];
+
+                _dataContext.ExceptionMessage = e.Message;
             }
         }
 
