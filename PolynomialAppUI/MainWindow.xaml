@@ -52,7 +52,8 @@
             Grid.Row="1"
             Grid.Column="0"
             Margin="15"
-            Orientation="Vertical">
+            Orientation="Vertical"
+            VerticalAlignment="Center">
 
             <StackPanel
                 Margin="15"
