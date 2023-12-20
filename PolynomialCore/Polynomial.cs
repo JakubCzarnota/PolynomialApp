@@ -971,7 +971,7 @@ namespace PolynomialCore
                 newCoefficients[i] -= b.Coefficients[i];
             }
 
-            int newDegree = -1;
+            int newDegree = 0;
 
             for (int i = newCoefficients.Length - 1; i >= 0; i--)
             {
