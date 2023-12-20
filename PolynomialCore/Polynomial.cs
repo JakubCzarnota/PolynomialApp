@@ -92,7 +92,7 @@ namespace PolynomialCore
                         Coefficients = FindCoefficientsFromGeneralFormula(polynomial);
                         return;
                     }
-                    catch (Exception)
+                    catch (FormatException)
                     {
 
                     }
@@ -102,7 +102,7 @@ namespace PolynomialCore
                         Coefficients = FindCoefficiantsFromFactoredFormula(polynomial);
                         return;
                     }
-                    catch (Exception)
+                    catch (FormatException)
                     {
 
                     }
