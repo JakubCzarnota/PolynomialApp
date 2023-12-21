@@ -16,10 +16,8 @@
                 <ResourceDictionary Source="Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:RootsConverter x:Key="RootsConverter"/>
-            <converters:MonotinicityIncreasingConverter x:Key="MonotinicityIncreasingConverter"/>
-            <converters:MonotinicityDecreasingConverter x:Key="MonotinicityDecreasingConverter"/>
-            <converters:PositiveValuesConverter x:Key="PositiveValuesConverter"/>
-            <converters:NegativeValuesConverter x:Key="NegativeValuesConverter"/>
+            <converters:MonotinicityConverter x:Key="MonotinicityConverter"/>
+            <converters:ValuesConverter x:Key="ValuesConverter"/>
             <converters:ValuesSetConverter x:Key="ValuesSetConverter"/>
         </ResourceDictionary>
     </Window.Resources>
@@ -83,7 +81,9 @@
                     DataContext="{Binding Polynomial}">
 
                     <Run Text="f(x)↑⇔x∈"/>
-                    <Run Text="{Binding Converter={StaticResource MonotinicityIncreasingConverter}, Mode=OneWay}"/>
+                    <Run Text="{Binding Converter={StaticResource MonotinicityConverter}, 
+                        ConverterParameter={x:Static converters:MonotonicityType.Increasing},
+                        Mode=OneWay}"/>
 
                 </TextBlock>
 
@@ -92,7 +92,9 @@
                     DataContext="{Binding Polynomial}">
 
                     <Run Text="f(x)↓⇔x∈"/>
-                    <Run Text="{Binding Converter={StaticResource MonotinicityDecreasingConverter}, Mode=OneWay}"/>
+                    <Run Text="{Binding Converter={StaticResource MonotinicityConverter},
+                        ConverterParameter={x:Static converters:MonotonicityType.Decreasing},
+                        Mode=OneWay}"/>
 
                 </TextBlock>
 
@@ -105,7 +107,9 @@
                     DataContext="{Binding Polynomial}">
 
                     <Run Text="f(x)>0⇔x∈"/>
-                    <Run Text="{Binding Converter={StaticResource PositiveValuesConverter}, Mode=OneWay}"/>
+                    <Run Text="{Binding Converter={StaticResource ValuesConverter}, 
+                        ConverterParameter={x:Static converters:ValuesType.Positive},
+                        Mode=OneWay}"/>
 
                 </TextBlock>
 
@@ -114,7 +118,9 @@
                     DataContext="{Binding Polynomial}">
 
                     <Run Text="f(x)&lt;0⇔x∈"/>
-                    <Run Text="{Binding Converter={StaticResource NegativeValuesConverter}, Mode=OneWay}"/>
+                    <Run Text="{Binding Converter={StaticResource ValuesConverter},
+                        ConverterParameter={x:Static converters:ValuesType.Negative},
+                        Mode=OneWay}"/>
 
                 </TextBlock>
 

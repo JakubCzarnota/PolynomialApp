@@ -9,18 +9,37 @@ using System.Windows.Data;
 
 namespace PolynomialAppUI.Converters
 {
-    class NegativeValuesConverter : IValueConverter
+    class ValuesConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var poly = value as Polynomial;
 
-            if(poly == null || poly.NegativeValues == null || poly.NegativeValues.Count < 1)
+            if(poly == null)
+                return "Ø";
+
+            List<Interval>? intervals;
+
+            var valuesType = (ValuesType)Enum.Parse(typeof(ValuesType), parameter.ToString()!);
+
+            switch (valuesType)
+            {
+                case ValuesType.Negative:
+                    intervals = poly.NegativeValues;
+                    break;
+                case ValuesType.Positive:
+                    intervals = poly.PositiveValues;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid values type");
+            }
+
+            if (intervals == null || intervals.Count < 1)
                 return "Ø";
 
             string s = "";
 
-            foreach (var negativeValue in poly.NegativeValues ) 
+            foreach (var negativeValue in intervals ) 
             {
                 s += negativeValue.ToString() + "∪";
             }
