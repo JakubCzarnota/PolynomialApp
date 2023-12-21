@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PolynomialAppUI"
+        xmlns:core="clr-namespace:PolynomialCore;assembly=PolynomialCore"
         xmlns:converters="clr-namespace:PolynomialAppUI.Converters"
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
@@ -15,6 +16,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <converters:FormulaConverter x:Key="FormulaConverter"/>
             <converters:RootsConverter x:Key="RootsConverter"/>
             <converters:MonotinicityConverter x:Key="MonotinicityConverter"/>
             <converters:ValuesConverter x:Key="ValuesConverter"/>
@@ -58,6 +60,33 @@
             <StackPanel
                 Margin="15"
                 Background="WhiteSmoke">
+
+                <TextBlock
+                    Style="{StaticResource Title}"
+                    Text="Polynomial's formulas:"/>
+
+                <TextBlock
+                    Style="{StaticResource Value}"
+                    DataContext="{Binding Polynomial}">
+                    
+                    <Run Text="General: "/>
+                    <Run Text="{Binding Converter={StaticResource FormulaConverter},
+                        ConverterParameter={x:Static core:FormulaTypes.General},
+                        Mode=OneWay}"/>
+
+                </TextBlock>
+                
+                <TextBlock
+                    Style="{StaticResource Value}"
+                    DataContext="{Binding Polynomial}">
+                    
+                    <Run Text="Factored: "/>
+                    <Run Text="{Binding Converter={StaticResource FormulaConverter},
+                        ConverterParameter={x:Static core:FormulaTypes.Factored},
+                        Mode=OneWay}"/>
+
+                </TextBlock>
+
 
                 <TextBlock
                     Style="{StaticResource Title}"
