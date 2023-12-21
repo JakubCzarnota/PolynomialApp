@@ -1219,9 +1219,9 @@ namespace PolynomialCore
                     foreach (var root in Roots)
                     {
                         if (root.Value > 0)
-                            st += root.Multiplicity > 1 ? $"(x-{root.Value})^{root.Multiplicity}" : $"(x-{root.Value})";
+                            st += root.Multiplicity > 1 ? $"(x-{root.Value.ToString("0.######")})^{root.Multiplicity}" : $"(x-{root.Value.ToString("0.######")})";
                         else if (root.Value < 0)
-                            st += root.Multiplicity > 1 ? $"(x+{Math.Abs(root.Value)})^{root.Multiplicity}" : $"(x+{Math.Abs(root.Value)})";
+                            st += root.Multiplicity > 1 ? $"(x+{Math.Abs(root.Value).ToString("0.######")})^{root.Multiplicity}" : $"(x+{Math.Abs(root.Value).ToString("0.######")})";
                     }
 
                     var newPoly = new Polynomial(st);
