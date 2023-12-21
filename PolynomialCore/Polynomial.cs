@@ -1224,6 +1224,11 @@ namespace PolynomialCore
                             st += root.Multiplicity > 1 ? $"(x+{Math.Abs(root.Value)})^{root.Multiplicity}" : $"(x+{Math.Abs(root.Value)})";
                     }
 
+                    var newPoly = new Polynomial(st);
+
+                    if (newPoly.Degree != Degree)
+                        throw new ArgumentException("Cannot create factored formula");
+
                     return st;
 
                 default:
