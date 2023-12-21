@@ -7,24 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace PolynomialAppUI
+namespace PolynomialAppUI.Converters
 {
-    class MonotinicityDecreasingConverter : IValueConverter
+    internal class PositiveValuesConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var poly = value as Polynomial;
 
-            if (poly == null || poly.Monotinicity == null || poly.Monotinicity.Value.decreasing.Count() < 1)
-                return "∅";
-
-            List<Interval> decreasing = poly.Monotinicity.Value.decreasing;
+            if (poly == null || poly.PositiveValues == null || poly.PositiveValues.Count < 1)
+                return "Ø";
 
             string s = "";
 
-            foreach (var interval in decreasing)
+            foreach (var positiveValues in poly.PositiveValues)
             {
-                s += $"{interval}∪";
+                s += positiveValues.ToString() + "∪";
             }
 
             s = s.Substring(0, s.Length - 1);

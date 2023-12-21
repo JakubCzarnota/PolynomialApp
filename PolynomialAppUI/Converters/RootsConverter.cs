@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace PolynomialAppUI
+namespace PolynomialAppUI.Converters
 {
     class RootsConverter : IValueConverter
     {

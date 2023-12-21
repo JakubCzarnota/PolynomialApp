@@ -7,22 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace PolynomialAppUI
+namespace PolynomialAppUI.Converters
 {
-    class MonotinicityIncreasingConverter : IValueConverter
+    class MonotinicityDecreasingConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var poly = value as Polynomial;
 
-            if (poly == null || poly.Monotinicity == null || poly.Monotinicity.Value.increasing.Count() < 1)
+            if (poly == null || poly.Monotinicity == null || poly.Monotinicity.Value.decreasing.Count() < 1)
                 return "∅";
 
-            List<Interval> increasing = poly.Monotinicity.Value.increasing;
+            List<Interval> decreasing = poly.Monotinicity.Value.decreasing;
 
             string s = "";
 
-            foreach (var interval in increasing)
+            foreach (var interval in decreasing)
             {
                 s += $"{interval}∪";
             }

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PolynomialAppUI"
+        xmlns:converters="clr-namespace:PolynomialAppUI.Converters"
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
         Background="#313952"
@@ -14,12 +15,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <local:RootsConverter x:Key="RootsConverter"/>
-            <local:MonotinicityIncreasingConverter x:Key="MonotinicityIncreasingConverter"/>
-            <local:MonotinicityDecreasingConverter x:Key="MonotinicityDecreasingConverter"/>
-            <local:PositiveValuesConverter x:Key="PositiveValuesConverter"/>
-            <local:NegativeValuesConverter x:Key="NegativeValuesConverter"/>
-            <local:ValuesSetConverter x:Key="ValuesSetConverter"/>
+            <converters:RootsConverter x:Key="RootsConverter"/>
+            <converters:MonotinicityIncreasingConverter x:Key="MonotinicityIncreasingConverter"/>
+            <converters:MonotinicityDecreasingConverter x:Key="MonotinicityDecreasingConverter"/>
+            <converters:PositiveValuesConverter x:Key="PositiveValuesConverter"/>
+            <converters:NegativeValuesConverter x:Key="NegativeValuesConverter"/>
+            <converters:ValuesSetConverter x:Key="ValuesSetConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
