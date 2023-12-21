@@ -49,7 +49,8 @@
             />
 
         <StackPanel
-            Grid.Row="1"
+            Grid.Row="0"
+            Grid.RowSpan="3"
             Grid.Column="0"
             Margin="15"
             Orientation="Vertical"
@@ -143,7 +144,8 @@
         </lvc:CartesianChart>
 
         <StackPanel
-            Grid.Row="1"
+            Grid.Row="0"
+            Grid.RowSpan="3"
             Grid.Column="2"
             VerticalAlignment="Center"
             Orientation="Vertical"
